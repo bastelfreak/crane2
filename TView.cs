@@ -9,16 +9,16 @@ namespace DemoOpenGLBasicsCS
     {
         public Crane Kran1;
         
-
         /// <summary>
         /// hier wird gezeichnet
         /// </summary>
         public void drawScene()
         {
-            coordinateSystem(1);
+            coordinateSystem(3.5); //Übergebene Zahl gibt Länge der R, G, B Pfeile des Koordinatensystems an
             Kran1.zeichnung();           
         }
                     
+        
         /// <summary>
         /// OpenGL View
         /// </summary>
@@ -63,12 +63,22 @@ namespace DemoOpenGLBasicsCS
 
         protected override void OnSizeChanged(System.EventArgs e)
         {
+            //    GL.glViewport(0, 0, this.Bounds.Width, this.Bounds.Height);
+            //    GL.glMatrixMode(GL.GL_PROJECTION);
+            //    GL.glLoadIdentity();
+            //    GL.gluPerspective(45.0f, (float)this.Bounds.Width / (float)this.Bounds.Height, 0.1f, 500.0f);
+            //    GL.glMatrixMode(GL.GL_MODELVIEW);
+
             GL.glViewport(0, 0, this.Bounds.Width, this.Bounds.Height);
             GL.glMatrixMode(GL.GL_PROJECTION);
             GL.glLoadIdentity();
-            GL.gluPerspective(45.0f, (float)this.Bounds.Width / (float)this.Bounds.Height, 0.1f, 500.0f);
+            GL.gluPerspective(50.0f, (float)this.Bounds.Width / (float)this.Bounds.Height, 0.1f, 500.0f);
+            GLU.gluLookAt(3.0, 3.0, 8.0, /* Hier wird der Kamerablickwinkel eingestellt für X, Y, Z */
+                            0.0, 0.0, 0.0,
+                            0.0, 1.0, 0.0);
             GL.glMatrixMode(GL.GL_MODELVIEW);
         }
+        
 
         public override void glDraw()
         {
@@ -89,7 +99,7 @@ namespace DemoOpenGLBasicsCS
         {
             if (drawCoordinateSystem)
             {
-                double triangleFaktor = faktor * 0.1;
+                double triangleFaktor = faktor * 0.2;
                 // X - Axis red
                 GL.glBegin(GL.GL_LINES);
                 GL.glColor3d(1.0, 0.0, 0.0);

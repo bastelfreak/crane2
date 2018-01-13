@@ -80,8 +80,10 @@ namespace DemoOpenGLBasicsCS.interfaces
         public virtual void zeichnung()
         { //Kran wird definiert und anschließend gezeichnet
             GL.glColor3f(colorred, colorgreen, colorblue);
-            GL.glTranslated(0.0, 0.0, -6.0);
+
+            GL.glTranslated(0.0, 0.0, 0.0);
             matrix.Startvektor = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, -6.0);
+
             GL.glRotated(-90, 1, 0, 0);
             GL.glRotated(drehwinkel, 0, 0, 1);
             matrix.Matrixstart = System.Windows.Media.Media3D.Matrix3D.Multiply(new System.Windows.Media.Media3D.Matrix3D(1, 0, 0, 0, 0, Math.Cos(-90), -(Math.Sin(-90)), 0, 0, Math.Sin(-90), Math.Cos(-90), 0, 0, 0, 0, 1),

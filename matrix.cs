@@ -46,9 +46,9 @@ namespace DemoOpenGLBasicsCS
             Vector3D tempvector6 = Vector3D.Add(tempvector5, Matrixseil);
             Vector3D resultvector = Vector3D.Add(tempvector6, SeilVector);
 
-            x = resultvector.X;
-            y = resultvector.Y;
-            z = resultvector.Z;
+            x = Math.Round(resultvector.X, 2);
+            y = Math.Round(resultvector.Y, 2);
+            z = Math.Round(resultvector.Z, 2);
         }
     }
 }
