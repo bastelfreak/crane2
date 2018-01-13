@@ -1,6 +1,7 @@
 using CsGL.OpenGL;
 using DemoOpenGLBasicsCS.models;
 using System;
+using System.Windows.Media.Media3D;
 
 namespace DemoOpenGLBasicsCS.interfaces
 {
@@ -9,39 +10,62 @@ namespace DemoOpenGLBasicsCS.interfaces
         private CylinderPart turm;
         private CylinderPart ausleger;
         private CylinderPart seil;
-        private float drehwinkel;
+        private double drehwinkel;
         private float seillaenge;
         private float seilposition;
+        private double movementfactorXZ;
+        private double movementfactorY;
+        private double towerlength;
         protected float colorred;
         protected float colorgreen;
         protected float colorblue;
-        private matrix matrix;
+        private Matrix matrix;
 
         public ICrane()
         {
-            matrix = new matrix();
-            drehwinkel = 0.0f;
+            drehwinkel = 0.0;
             seillaenge = 1.5f;
             seilposition = 0.5f;
+            towerlength = 3;
+            Vector3D InitialVector = new Vector3D();
+            InitialVector.X = seilposition;
+            InitialVector.Y = towerlength - seillaenge;
+            InitialVector.Z = 0;
+            matrix = new Matrix(InitialVector);
+            movementfactorY = 1;
+            movementfactorXZ = 1;
         }
         protected uint style = 100012; //Übergabe für das GLU.GLU_FILL, damit dies einheitlich ist
 
-        public float Drehwinkel { get { return drehwinkel; } set { drehwinkel = value; } }
+        public double Drehwinkel { get { return drehwinkel; } set { drehwinkel = value; } }
         public float Seillaenge
         {
             get { return seillaenge; }
             set
             {
-                if (value > turm.length - 0.3f)
+                if (value > turm.Length - 0.3f)
                 {
-                    seillaenge = (float)turm.length - 0.3F;
+                    seillaenge = (float)turm.Length - 0.3F;
+                    movementfactorY = 1;
                 }
                 else if (value < 0.4f)
                 {
                     seillaenge = 0.4F;
+                    movementfactorY = 1;
                 }
                 else
                 {
+                    if (value > seillaenge)
+                    {
+                        movementfactorY = 100 / (turm.Length - value) * ((turm.Length - value) + 0.2f) / 100;
+                    } else
+                    {
+                        movementfactorY = 100 / (turm.Length - value) * ((turm.Length - value) - 0.2f) / 100;
+                    }
+                    if (movementfactorY <= 0.0f)
+                    {
+                        movementfactorY = 1;
+                    }
                     seillaenge = value;
                 }
             }
@@ -53,12 +77,32 @@ namespace DemoOpenGLBasicsCS.interfaces
 
             set
             {
-                if (value > ausleger.length)
-                    seilposition = (float)ausleger.length;
+                if (value > ausleger.Length)
+                {
+                    seilposition = (float)ausleger.Length;
+                    // set it to 1, so the vector doesn't move
+                    movementfactorXZ = 1;
+                }
                 else if (value < 0.5f)
+                {
                     seilposition = 0.5f;
+                    movementfactorXZ = 1;
+                }
                 else
+                {
+                    // > 0 < 1 will move the ball to the middle
+                    // > 1 will move the ball away from the middle
+                    // < 0 we all die?
+                    // yeah we just died and need to add a condition that filters for 0...
+                    if (value > seilposition) {
+                        movementfactorXZ = 100 / value * (value + 0.05f) / 100;
+                    }
+                    else
+                    {
+                        movementfactorXZ = 100 / value * (value - 0.05f) / 100;
+                    }
                     seilposition = value;
+                }
             }
         }
 
@@ -66,6 +110,8 @@ namespace DemoOpenGLBasicsCS.interfaces
         public double X { get => matrix.X; }
         public double Y { get => matrix.Y; }
         public double Z { get => matrix.Z; }
+        public double MovementfactorXZ { get => movementfactorXZ;}
+        public double MovementfactorY { get => movementfactorY;}
 
         public virtual void setMovement(IMovement movement)
         {
@@ -87,52 +133,35 @@ namespace DemoOpenGLBasicsCS.interfaces
             GL.glColor3f(colorred, colorgreen, colorblue);
             GL.glTranslated(0.0, 0.0, 0.0);
             GL.glRotated(-90, 1, 0, 0);
-            //GL.glRo
             GL.glRotated(drehwinkel, 0, 0, 1);
-            matrix.Matrixstart = System.Windows.Media.Media3D.Matrix3D.Multiply(
-                // in the past, this matrix used -90 for all values instead of 90
-                matrix.Rotate_x_matrix,
-                new System.Windows.Media.Media3D.Matrix3D(
-                    Math.Cos(Degree2Radiant(drehwinkel)), -(Math.Sin(Degree2Radiant(drehwinkel))), 0, 0,
-                    Math.Sin(Degree2Radiant(drehwinkel)), Math.Cos(Degree2Radiant(drehwinkel)), 0, 0,
-                    0, 0, 1, 0,
-                    0, 0, 0, 1
-                )
-            );
 
-            turm = new CylinderPart(3);
+            matrix.RotateY(drehwinkel);
+
+            turm = new CylinderPart(towerlength);
             //GL.glRotated(-90, 1, 0, 0);
-            GLU.gluCylinder(turm.element, 0.2, 0.2, turm.length, 4, 10);
+            GLU.gluCylinder(turm.element, 0.2, 0.2, turm.Length, 4, 10);
             GLU.gluQuadricDrawStyle(turm.element, style);
-            matrix.Matrixturm = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, turm.length);
-            
 
             ausleger = new CylinderPart(2);
-            GL.glTranslated(0.0, 0.0, turm.length - 0.2f);
+            GL.glTranslated(0.0, 0.0, turm.Length - 0.2f);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 0, 0, 1);
-            GLU.gluCylinder(ausleger.element, 0.2, 0.2, ausleger.length, 3, 10);
+            GLU.gluCylinder(ausleger.element, 0.2, 0.2, ausleger.Length, 3, 10);
             GLU.gluQuadricDrawStyle(ausleger.element, style);
-            matrix.Matrixausleger = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, turm.length - 0.2f);
-            matrix.Turmzuausleger = System.Windows.Media.Media3D.Matrix3D.Multiply(
-                matrix.Rotate_y_matrix,
-                matrix.Rotate_z_matrix
-            );
+
+            //matrix.TranslateXZ(Movementfactor);
 
             seil = new CylinderPart(seillaenge);
             GL.glTranslated(0.0, 0.0, Seilposition);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 1, 0, 0);
-            GLU.gluCylinder(seil.element, 0.01, 0.01, seil.length, 20, 10);
+            GLU.gluCylinder(seil.element, 0.01, 0.01, seil.Length, 20, 10);
             GLU.gluQuadricDrawStyle(seil.element, style);
-            matrix.Matrixseil = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, Seilposition);
-            matrix.Auslegerzuseil = System.Windows.Media.Media3D.Matrix3D.Multiply(                matrix.Rotate_y_matrix,                matrix.Rotate_x_matrix);
-
-            matrix.SeilVector = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, Seillaenge);
+            matrix.TranslateY(movementfactorY);
 
             GL.glTranslated(0.0, 0.0, Seillaenge);
             GLUT.glutWireSphere(0.1, 100, 150);
-            matrix.zielpunkt();
+            //matrix.zielpunkt();
         }
     }
 }

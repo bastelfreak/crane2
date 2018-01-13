@@ -9,17 +9,28 @@ namespace DemoOpenGLBasicsCS
     public partial class GUI : Form
 
     {
-        TView oglView = new TView();
-        Boolean buttonDown;
+        private TView oglView;
+        private Boolean buttonDown;
 
         public GUI()
         {
             InitializeComponent();
 
+            oglView = new TView();
             oglView.Dock = DockStyle.Fill;
             panel.Controls.Add(oglView);
             panel.Focus();
             this.buttonDown = false;
+            Update_positions();
+        }
+
+        private void Update_positions()
+        {
+            tbx_x.Text = Math.Round(oglView.Kran1.X, 2).ToString();
+            tbx_y.Text = Math.Round(oglView.Kran1.Y, 2).ToString();
+            tbx_z.Text = Math.Round(oglView.Kran1.Z, 2).ToString();
+            tbx_xz_movement.Text = oglView.Kran1.MovementfactorXZ.ToString();
+            tbx_y_movement.Text = oglView.Kran1.MovementfactorY.ToString();
         }
 
         private void Movement(interfaces.IMovement b)
@@ -31,9 +42,7 @@ namespace DemoOpenGLBasicsCS
                 oglView.Kran1.zeichnung();
                 oglView.Refresh();
                 oglView.Focus();
-                tbx_x.Text = oglView.Kran1.X.ToString();
-                tbx_y.Text = oglView.Kran1.Y.ToString();
-                tbx_z.Text = oglView.Kran1.Z.ToString();
+                Update_positions();
                 Thread.Sleep(50);
                 Application.DoEvents();
             }
@@ -44,7 +53,7 @@ namespace DemoOpenGLBasicsCS
             if (e.Button == MouseButtons.Left)
             {
                 buttonDown = true;
-                Movement(new left());
+                Movement(new Left());
             }
         }
 
@@ -58,7 +67,7 @@ namespace DemoOpenGLBasicsCS
             if (e.Button == MouseButtons.Left)
             {
                 buttonDown = true;
-                Movement(new right());
+                Movement(new Right());
             }
         }
 
@@ -72,7 +81,7 @@ namespace DemoOpenGLBasicsCS
             if (e.Button == MouseButtons.Left)
             {
                 buttonDown = true;
-                Movement(new forth());
+                Movement(new Forth());
             }
         }
 
@@ -86,7 +95,7 @@ namespace DemoOpenGLBasicsCS
             if (e.Button == MouseButtons.Left)
             {
                 buttonDown = true;
-                Movement(new back());
+                Movement(new Back());
             }
         }
 
@@ -100,7 +109,7 @@ namespace DemoOpenGLBasicsCS
             if (e.Button == MouseButtons.Left)
             {
                 buttonDown = true;
-                Movement(new up());
+                Movement(new Up());
             }
         }
 
@@ -114,7 +123,7 @@ namespace DemoOpenGLBasicsCS
             if (e.Button == MouseButtons.Left)
             {
                 buttonDown = true;
-                Movement(new down());
+                Movement(new Down());
             }
         }
 
@@ -129,6 +138,11 @@ namespace DemoOpenGLBasicsCS
         }
 
         private void GUI_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

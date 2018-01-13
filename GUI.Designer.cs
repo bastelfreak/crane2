@@ -45,6 +45,8 @@
             this.tbx_x = new System.Windows.Forms.TextBox();
             this.tbx_y = new System.Windows.Forms.TextBox();
             this.tbx_z = new System.Windows.Forms.TextBox();
+            this.tbx_xz_movement = new System.Windows.Forms.TextBox();
+            this.tbx_y_movement = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // panel
@@ -212,11 +214,28 @@
             this.tbx_z.Size = new System.Drawing.Size(100, 20);
             this.tbx_z.TabIndex = 16;
             // 
+            // tbx_xz_movement
+            // 
+            this.tbx_xz_movement.Location = new System.Drawing.Point(970, 327);
+            this.tbx_xz_movement.Name = "tbx_xz_movement";
+            this.tbx_xz_movement.Size = new System.Drawing.Size(100, 20);
+            this.tbx_xz_movement.TabIndex = 17;
+            this.tbx_xz_movement.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // tbx_y_movement
+            // 
+            this.tbx_y_movement.Location = new System.Drawing.Point(970, 353);
+            this.tbx_y_movement.Name = "tbx_y_movement";
+            this.tbx_y_movement.Size = new System.Drawing.Size(100, 20);
+            this.tbx_y_movement.TabIndex = 18;
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 504);
+            this.ClientSize = new System.Drawing.Size(1082, 504);
+            this.Controls.Add(this.tbx_y_movement);
+            this.Controls.Add(this.tbx_xz_movement);
             this.Controls.Add(this.tbx_z);
             this.Controls.Add(this.tbx_y);
             this.Controls.Add(this.tbx_x);
@@ -261,6 +280,8 @@
         private System.Windows.Forms.TextBox tbx_x;
         private System.Windows.Forms.TextBox tbx_y;
         private System.Windows.Forms.TextBox tbx_z;
+        private System.Windows.Forms.TextBox tbx_xz_movement;
+        private System.Windows.Forms.TextBox tbx_y_movement;
     }
 }
 

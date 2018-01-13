@@ -2,7 +2,7 @@
 
 namespace DemoOpenGLBasicsCS.movements
 {
-    public class forth : interfaces.IMovement
+    public class Forth : interfaces.IMovement
     {
         public void move(ICrane element)
         {

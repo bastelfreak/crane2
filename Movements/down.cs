@@ -2,7 +2,7 @@
 
 namespace DemoOpenGLBasicsCS.movements
 {
-    public class down : interfaces.IMovement
+    public class Down : interfaces.IMovement
     {
         public void move(ICrane element)
         {
