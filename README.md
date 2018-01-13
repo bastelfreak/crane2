@@ -27,6 +27,15 @@
 
 - Changes Y
 
+## known bugs
+
+x is y?
+y is z?
+z is x??
+
+'turn left' turns it right
+'turn right' turns it left
+
 ## Changes by Tim Meusel
 
 - Replace labels with textboxes
