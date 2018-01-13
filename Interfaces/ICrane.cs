@@ -138,7 +138,6 @@ namespace DemoOpenGLBasicsCS.interfaces
             matrix.RotateY(drehwinkel);
 
             turm = new CylinderPart(towerlength);
-            //GL.glRotated(-90, 1, 0, 0);
             GLU.gluCylinder(turm.element, 0.2, 0.2, turm.Length, 4, 10);
             GLU.gluQuadricDrawStyle(turm.element, style);
 
@@ -148,8 +147,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             GL.glRotated(90, 0, 0, 1);
             GLU.gluCylinder(ausleger.element, 0.2, 0.2, ausleger.Length, 3, 10);
             GLU.gluQuadricDrawStyle(ausleger.element, style);
-
-            //matrix.TranslateXZ(Movementfactor);
+            matrix.TranslateXZ(movementfactorXZ);
 
             seil = new CylinderPart(seillaenge);
             GL.glTranslated(0.0, 0.0, Seilposition);
@@ -161,7 +159,6 @@ namespace DemoOpenGLBasicsCS.interfaces
 
             GL.glTranslated(0.0, 0.0, Seillaenge);
             GLUT.glutWireSphere(0.1, 100, 150);
-            //matrix.zielpunkt();
         }
     }
 }
