@@ -93,12 +93,8 @@ namespace DemoOpenGLBasicsCS.interfaces
             //GL.glRo
             GL.glRotated(drehwinkel, 0, 0, 1);
             matrix.Matrixstart = System.Windows.Media.Media3D.Matrix3D.Multiply(
-                new System.Windows.Media.Media3D.Matrix3D(
-                    1, 0, 0, 0,
-                    0, Math.Cos(Degree2Radiant(-90)), -(Math.Sin(Degree2Radiant(-90))), 0,
-                    0, Math.Sin(Degree2Radiant(-90)), Math.Cos(Degree2Radiant(-90)), 0,
-                    0, 0, 0, 1
-                ),
+                // in the past, this matrix used -90 for all values instead of 90
+                matrix.Rotate_x_matrix,
                 new System.Windows.Media.Media3D.Matrix3D(
                     Math.Cos(Degree2Radiant(drehwinkel)), -(Math.Sin(Degree2Radiant(drehwinkel))), 0, 0,
                     Math.Sin(Degree2Radiant(drehwinkel)), Math.Cos(Degree2Radiant(drehwinkel)), 0, 0,
@@ -121,8 +117,10 @@ namespace DemoOpenGLBasicsCS.interfaces
             GLU.gluCylinder(ausleger.element, 0.2, 0.2, ausleger.length, 3, 10);
             GLU.gluQuadricDrawStyle(ausleger.element, style);
             matrix.Matrixausleger = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, turm.length - 0.2f);
-            matrix.Turmzuausleger = System.Windows.Media.Media3D.Matrix3D.Multiply(new System.Windows.Media.Media3D.Matrix3D(Math.Cos(Degree2Radiant(90)), 0, Math.Sin(Degree2Radiant(90)), 0, 0, 1, 0, 0, -(Math.Sin(Degree2Radiant(90))), 0, Math.Cos(Degree2Radiant(90)), 0, 0, 0, 0, 1),
-                                                                                   new System.Windows.Media.Media3D.Matrix3D(Math.Cos(Degree2Radiant(90)), -(Math.Sin(Degree2Radiant(90))), 0, 0, Math.Sin(Degree2Radiant(90)), Math.Cos(Degree2Radiant(90)), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
+            matrix.Turmzuausleger = System.Windows.Media.Media3D.Matrix3D.Multiply(
+                matrix.Rotate_y_matrix,
+                matrix.Rotate_z_matrix
+            );
 
             seil = new CylinderPart(seillaenge);
             GL.glTranslated(0.0, 0.0, Seilposition);
@@ -131,7 +129,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             GLU.gluCylinder(seil.element, 0.01, 0.01, seil.length, 20, 10);
             GLU.gluQuadricDrawStyle(seil.element, style);
             matrix.Matrixseil = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, Seilposition);
-            matrix.Auslegerzuseil = System.Windows.Media.Media3D.Matrix3D.Multiply(new System.Windows.Media.Media3D.Matrix3D(Math.Cos(Degree2Radiant(90)), 0, Math.Sin(Degree2Radiant(90)), 0, 0, 1, 0, 0, -(Math.Sin(Degree2Radiant(90))), 0, Math.Cos(Degree2Radiant(90)), 0, 0, 0, 0, 1),                                                                                    new System.Windows.Media.Media3D.Matrix3D(1, 0, 0, 0, 0, Math.Cos(Degree2Radiant(90)), -(Math.Sin(Degree2Radiant(90))), 0, 0, Math.Sin(Degree2Radiant(90)), Math.Cos(Degree2Radiant(90)), 0, 0, 0, 0, 1));
+            matrix.Auslegerzuseil = System.Windows.Media.Media3D.Matrix3D.Multiply(                matrix.Rotate_y_matrix,                matrix.Rotate_x_matrix);
 
             matrix.SeilVector = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, Seillaenge);
 
