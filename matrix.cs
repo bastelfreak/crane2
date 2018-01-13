@@ -19,6 +19,9 @@ namespace DemoOpenGLBasicsCS
 
         private Vector3D matrixseil;
         private Vector3D seilVector;
+        private Matrix3D rotate_x_matrix;
+        private Matrix3D rotate_y_matrix;
+        private Matrix3D rotate_z_matrix;
 
         private double z;
         private double x;
@@ -35,7 +38,28 @@ namespace DemoOpenGLBasicsCS
         public double X { get => x; }
         public double Y { get => y; }
         public double Z { get => z; }
+        public Matrix3D Rotate_x_matrix { get => rotate_x_matrix;}
+        public Matrix3D Rotate_z_matrix { get => rotate_z_matrix;}
+        public Matrix3D Rotate_y_matrix { get => rotate_y_matrix;}
 
+        public matrix ()
+        {
+            rotate_x_matrix = new Matrix3D(
+                    1, 0, 0, 0,
+                    0, Math.Cos(Degree2Radiant(90)), -(Math.Sin(Degree2Radiant(90))), 0,
+                    0, Math.Sin(Degree2Radiant(90)), Math.Cos(Degree2Radiant(90)), 0,
+                    0, 0, 0, 1);
+            rotate_y_matrix = new Matrix3D(
+                    Math.Cos(Degree2Radiant(90)), 0, Math.Sin(Degree2Radiant(90)), 0,
+                    0, 1, 0, 0,
+                    -(Math.Sin(Degree2Radiant(90))), 0, Math.Cos(Degree2Radiant(90)), 0,
+                    0, 0, 0, 1);
+            rotate_z_matrix = new Matrix3D(
+                    Math.Cos(Degree2Radiant(90)), -(Math.Sin(Degree2Radiant(90))), 0, 0,
+                    Math.Sin(Degree2Radiant(90)), Math.Cos(Degree2Radiant(90)), 0, 0,
+                    0, 0, 1, 0,
+                    0, 0, 0, 1);
+        }
         public void zielpunkt()
         {
             Vector3D tempvector = Vector3D.Multiply(Startvektor, Matrixstart);
@@ -49,6 +73,11 @@ namespace DemoOpenGLBasicsCS
             x = Math.Round(resultvector.X, 2);
             y = Math.Round(resultvector.Y, 2);
             z = Math.Round(resultvector.Z, 2);
+        }
+
+        private double Degree2Radiant(double degree)
+        {
+            return degree * Math.PI / 180;
         }
     }
 }
