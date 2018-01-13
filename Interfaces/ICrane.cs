@@ -16,7 +16,6 @@ namespace DemoOpenGLBasicsCS.interfaces
         protected float colorgreen;
         protected float colorblue;
         private matrix matrix;
-        //private double z;
 
         public ICrane()
         {
@@ -26,8 +25,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             seilposition = 0.5f;
         }
         protected uint style = 100012; //Übergabe für das GLU.GLU_FILL, damit dies einheitlich ist
-        //private double x;
-        //private double y;
+
 
         public float Drehwinkel { get { return drehwinkel; } set { drehwinkel = value; } }
         public float Seillaenge
