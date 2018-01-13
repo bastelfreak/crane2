@@ -112,6 +112,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         public double Z { get => matrix.Z; }
         public double MovementfactorXZ { get => movementfactorXZ;}
         public double MovementfactorY { get => movementfactorY;}
+        public double Towerlength { get => towerlength;}
 
         public virtual void setMovement(IMovement movement)
         {
