@@ -42,6 +42,9 @@
             this.lbl_x = new System.Windows.Forms.Label();
             this.lbl_y = new System.Windows.Forms.Label();
             this.lbl_z = new System.Windows.Forms.Label();
+            this.tbx_x = new System.Windows.Forms.TextBox();
+            this.tbx_y = new System.Windows.Forms.TextBox();
+            this.tbx_z = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // panel
@@ -188,11 +191,35 @@
             this.lbl_z.TabIndex = 13;
             this.lbl_z.Text = "z";
             // 
+            // tbx_x
+            // 
+            this.tbx_x.Location = new System.Drawing.Point(799, 327);
+            this.tbx_x.Name = "tbx_x";
+            this.tbx_x.Size = new System.Drawing.Size(100, 20);
+            this.tbx_x.TabIndex = 14;
+            // 
+            // tbx_y
+            // 
+            this.tbx_y.Location = new System.Drawing.Point(799, 353);
+            this.tbx_y.Name = "tbx_y";
+            this.tbx_y.Size = new System.Drawing.Size(100, 20);
+            this.tbx_y.TabIndex = 15;
+            // 
+            // tbx_z
+            // 
+            this.tbx_z.Location = new System.Drawing.Point(799, 379);
+            this.tbx_z.Name = "tbx_z";
+            this.tbx_z.Size = new System.Drawing.Size(100, 20);
+            this.tbx_z.TabIndex = 16;
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(928, 504);
+            this.Controls.Add(this.tbx_z);
+            this.Controls.Add(this.tbx_y);
+            this.Controls.Add(this.tbx_x);
             this.Controls.Add(this.lbl_z);
             this.Controls.Add(this.lbl_y);
             this.Controls.Add(this.lbl_x);
@@ -209,6 +236,7 @@
             this.Controls.Add(this.panel);
             this.Name = "GUI";
             this.Text = "OpenGL Demo";
+            this.Load += new System.EventHandler(this.GUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,6 +258,9 @@
         private System.Windows.Forms.Label lbl_x;
         private System.Windows.Forms.Label lbl_y;
         private System.Windows.Forms.Label lbl_z;
+        private System.Windows.Forms.TextBox tbx_x;
+        private System.Windows.Forms.TextBox tbx_y;
+        private System.Windows.Forms.TextBox tbx_z;
     }
 }
 

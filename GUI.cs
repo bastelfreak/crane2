@@ -31,10 +31,9 @@ namespace DemoOpenGLBasicsCS
                 oglView.Kran1.zeichnung();
                 oglView.Refresh();
                 oglView.Focus();
-                matrix.zielpunkt();
-                lbl_x.Text = matrix.x;
-                lbl_y.Text = matrix.y;
-                lbl_z.Text = matrix.z;
+                tbx_x.Text = oglView.Kran1.X.ToString();
+                tbx_y.Text = oglView.Kran1.Y.ToString();
+                tbx_z.Text = oglView.Kran1.Z.ToString();
                 Thread.Sleep(50);
                 Application.DoEvents();
             }
@@ -125,6 +124,11 @@ namespace DemoOpenGLBasicsCS
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GUI_Load(object sender, EventArgs e)
         {
 
         }
