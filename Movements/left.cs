@@ -6,7 +6,7 @@ namespace DemoOpenGLBasicsCS.movements
     {
         public void move(ICrane element)
         {
-            element.Drehwinkel = element.Drehwinkel - 5;
+            element.Drehwinkel = element.Drehwinkel + 5;
         }
     }
 }

@@ -46,3 +46,4 @@ z is x??
 - assign data to attributes in ICrane properly in the constructor
 - add Degree2Radiant method
 - fix calculation of current position
+- fix left/right rotation (it was twisted)
