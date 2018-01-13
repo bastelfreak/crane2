@@ -34,7 +34,6 @@ namespace DemoOpenGLBasicsCS
         public Matrix3D Turmzuausleger { get => turmzuausleger; set => turmzuausleger = value; }
         public Vector3D Matrixturm { get => matrixturm; set => matrixturm = value; }
         public Matrix3D Matrixstart { get => matrixstart; set => matrixstart = value; }
-        public Vector3D Startvektor { get => startvektor; set => startvektor = value; }
         public double X { get => x; }
         public double Y { get => y; }
         public double Z { get => z; }
@@ -44,6 +43,7 @@ namespace DemoOpenGLBasicsCS
 
         public matrix ()
         {
+            startvektor = new Vector3D(0.0, 0.0, 0.0);
             rotate_x_matrix = new Matrix3D(
                     1, 0, 0, 0,
                     0, Math.Cos(Degree2Radiant(90)), -(Math.Sin(Degree2Radiant(90))), 0,
@@ -62,7 +62,7 @@ namespace DemoOpenGLBasicsCS
         }
         public void zielpunkt()
         {
-            Vector3D tempvector = Vector3D.Multiply(Startvektor, Matrixstart);
+            Vector3D tempvector = Vector3D.Multiply(startvektor, Matrixstart);
             Vector3D tempvector2 = Vector3D.Add(tempvector, Matrixturm);
             Vector3D tempvector3 = Vector3D.Multiply(tempvector2, Turmzuausleger);
             Vector3D tempvector4 = Vector3D.Add(tempvector3, Matrixausleger);

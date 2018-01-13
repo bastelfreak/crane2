@@ -85,10 +85,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         public virtual void zeichnung()
         { //Kran wird definiert und anschließend gezeichnet
             GL.glColor3f(colorred, colorgreen, colorblue);
-
             GL.glTranslated(0.0, 0.0, 0.0);
-            matrix.Startvektor = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, 0.0);
-
             GL.glRotated(-90, 1, 0, 0);
             //GL.glRo
             GL.glRotated(drehwinkel, 0, 0, 1);

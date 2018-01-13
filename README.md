@@ -47,3 +47,5 @@ z is x??
 - add Degree2Radiant method
 - fix calculation of current position
 - fix left/right rotation (it was twisted)
+- move matrices into matrix class
+- move startpoint into matrix class
