@@ -31,6 +31,11 @@
 
 - Trigonometric operations are slightly different to matrix operations
 
+## Changes by All
+
+- create GUI, interfaces and classes
+- create Code for all these functions and classes
+
 ## Changes by Tim Meusel
 
 - Replace labels with textboxes
@@ -51,3 +56,14 @@
 - *GERMAN* Hab auf kleine Tippfehler hingewiesen
 - moralische unterstützung
 - fragen gestellt
+
+## Changes by Marcel Reuter
+
+- add comments, for undefined code
+- add radiant and degres for calculating Matrics
+- change "drehwinkel" into rotationangle
+
+## Changes by Mario Bost
+
+- change translation for the first vector
+- change float into double for axes results
