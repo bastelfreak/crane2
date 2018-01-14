@@ -88,10 +88,12 @@ namespace DemoOpenGLBasicsCS.interfaces
                 {
                     if (value > ropelength)
                     {
-                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) + 0.2f) / 100;
+                        // we need to substract if the rope gets longer
+                        // we're interested in the length from the bottom to the ropeend, not the rope length
+                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) - 0.2f) / 100;
                     } else
                     {
-                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) - 0.2f) / 100;
+                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) + 0.2f) / 100;
                     }
                     if (movementfactorY <= 0.0f)
                     {

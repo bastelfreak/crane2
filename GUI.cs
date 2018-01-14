@@ -45,8 +45,8 @@ namespace DemoOpenGLBasicsCS
 
         private void Movement(interfaces.IMovement b)
         {
-            while (buttonDown)
-            {
+            //while (buttonDown)
+            //{
                 oglView.Kran1.setMovement(b);
                 oglView.Kran1.move();
                 oglView.Kran1.Draw();
@@ -55,7 +55,7 @@ namespace DemoOpenGLBasicsCS
                 Update_positions();
                 Thread.Sleep(50);
                 Application.DoEvents();
-            }
+            //}
         }
 
         private void btn_links_MouseDown(object sender, MouseEventArgs e)
