@@ -31,12 +31,6 @@ namespace DemoOpenGLBasicsCS
             finalVector = initialVector;
         }
 
-        // we maybe need that in the future again?
-        private double Degree2Radiant(double degree)
-        {
-            return degree * Math.PI / 180;
-        }
-
         public Vector3D RotateY(double radiant)
         {
             // radiant is 0 in the initial rendering (before anyone pressed a button)

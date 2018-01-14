@@ -57,6 +57,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbx_rad = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbx_alpha = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // panel
@@ -328,11 +332,49 @@
             this.label11.TabIndex = 23;
             this.label11.Text = "x";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(913, 421);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(51, 25);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "Rad";
+            // 
+            // tbx_rad
+            // 
+            this.tbx_rad.Location = new System.Drawing.Point(970, 421);
+            this.tbx_rad.Name = "tbx_rad";
+            this.tbx_rad.Size = new System.Drawing.Size(100, 20);
+            this.tbx_rad.TabIndex = 30;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(925, 446);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(24, 25);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "α";
+            // 
+            // tbx_alpha
+            // 
+            this.tbx_alpha.Location = new System.Drawing.Point(970, 452);
+            this.tbx_alpha.Name = "tbx_alpha";
+            this.tbx_alpha.Size = new System.Drawing.Size(100, 20);
+            this.tbx_alpha.TabIndex = 32;
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1082, 504);
+            this.Controls.Add(this.tbx_alpha);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.tbx_rad);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.tbx_tri_z);
             this.Controls.Add(this.tbx_tri_y);
             this.Controls.Add(this.tbx_tri_x);
@@ -400,6 +442,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbx_rad;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tbx_alpha;
     }
 }
 

@@ -46,9 +46,24 @@ namespace DemoOpenGLBasicsCS.interfaces
             get { return drehwinkel; }
             set
             {
-                drehwinkel = value;
+                // we need to ensure that we're never >360
+                // would mean we rotated too much to the left
+                if (value >= 360)
+                {
+                    drehwinkel = value - 360;
+
+                }
+                // we need to ensure that we're never < 360
+                // would mean we rotated too much to the right
+                else if (value <= -360){
+                    drehwinkel = value + 360;
+                }
+                else
+                {
+                    drehwinkel = value;
+                }
                 // recalculate the rotation on the vertical axis, because the rotation angle changed
-                matrix.RotateY(drehwinkel);
+                matrix.RotateY(Degree2Radiant(drehwinkel));
             }
         }
         public float Seillaenge
@@ -125,6 +140,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         public double X { get => matrix.X; }
         public double Y { get => matrix.Y; }
         public double Z { get => matrix.Z; }
+        public double Radiant { get => Degree2Radiant(drehwinkel); }
         public double MovementfactorXZ { get => movementfactorXZ;}
         public double MovementfactorY { get => movementfactorY;}
         public double Towerlength { get => towerheight;}
@@ -137,6 +153,28 @@ namespace DemoOpenGLBasicsCS.interfaces
         public virtual void move()
         {
             movement.move(this);
+        }
+
+        public double Radiant2Degree(double radiant)
+        {
+            // we always need to return something, otherweise we don't show anything in the UI
+            // calculation fails if one of the factors is 0
+            if (radiant != 0)
+            {
+                radiant = (360 / 2 * Math.PI) * radiant;
+            }
+            return radiant;
+        }
+
+        private double Degree2Radiant(double degree)
+        {
+            // we always need to return something, otherweise we don't show anything in the UI
+            // calculation fails if one of the factors is 0
+            if (degree != 0)
+            {
+                degree = degree * Math.PI / 180;
+            }
+            return degree;
         }
 
         public virtual void zeichnung()
