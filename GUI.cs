@@ -12,6 +12,15 @@ namespace DemoOpenGLBasicsCS
         private TView oglView;
         private Boolean buttonDown;
 
+        private int iterations;
+        private double delta_angle;
+        private double delta_ropeposition;
+        private double delta_ropelenght;
+
+        private double mark_drehwinkel;
+        private double mark_ropelength;
+        private double mark_ropeposition;
+
         public GUI()
         {
             InitializeComponent();
@@ -21,6 +30,7 @@ namespace DemoOpenGLBasicsCS
             panel.Controls.Add(oglView);
             panel.Focus();
             this.buttonDown = false; //needed for press the button and can hold it. It will be used in every button feature.
+            iterations = 100;
             Update_positions();
         }
 
@@ -140,6 +150,39 @@ namespace DemoOpenGLBasicsCS
         private void btn_seil_runter_MouseUp(object sender, MouseEventArgs e)
         {
             buttonDown = false;
+        }
+
+        public void btn_mark_position_Click(object sender, EventArgs e)
+        {
+            btn_goto_position.Enabled = true;
+            tbx_mark_x.Text = tbx_tri_x.Text;
+            tbx_mark_y.Text = tbx_tri_y.Text;
+            tbx_mark_z.Text = tbx_tri_z.Text;
+
+            mark_drehwinkel = oglView.Kran1.Rotationangle;
+            mark_ropeposition = oglView.Kran1.Ropeposition;
+            mark_ropelength = oglView.Kran1.Ropelength;
+    }
+
+        public void btn_goto_position_Click(object sender, EventArgs e)
+        {
+            delta_angle = ((mark_drehwinkel - oglView.Kran1.Rotationangle) / iterations);
+            delta_ropeposition = ((mark_ropeposition - oglView.Kran1.Ropeposition) / iterations);
+            delta_ropelenght = ((mark_ropelength - oglView.Kran1.Ropelength)/ iterations);
+
+            for (int i = 1; i <= iterations; i++)
+            {
+                oglView.Kran1.Rotationangle = oglView.Kran1.Rotationangle + delta_angle;
+                oglView.Kran1.Ropeposition = oglView.Kran1.Ropeposition + delta_ropeposition;
+                oglView.Kran1.Ropelength = oglView.Kran1.Ropelength + delta_ropelenght;
+
+                oglView.Kran1.Draw();
+                oglView.Refresh();
+                oglView.Focus();
+                Update_positions();
+
+                Thread.Sleep(50);
+            }
         }
     }
 }

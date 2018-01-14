@@ -67,3 +67,8 @@
 
 - change translation for the first vector
 - change float into double for axes results
+
+## Changes by Holger Stertz
+
+- Position of crane can be saved
+- Crane can go way back to saved position (Inverse Kinematics)
