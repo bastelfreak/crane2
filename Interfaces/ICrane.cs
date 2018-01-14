@@ -41,7 +41,16 @@ namespace DemoOpenGLBasicsCS.interfaces
         }
         protected uint style = 100012; //Übergabe für das GLU.GLU_FILL, damit dies einheitlich ist
 
-        public double Drehwinkel { get { return drehwinkel; } set { drehwinkel = value; } }
+        public double Drehwinkel
+        {
+            get { return drehwinkel; }
+            set
+            {
+                drehwinkel = value;
+                // recalculate the rotation on the vertical axis, because the rotation angle changed
+                matrix.RotateY(drehwinkel);
+            }
+        }
         public float Seillaenge
         {
             get { return seillaenge; }
@@ -72,6 +81,7 @@ namespace DemoOpenGLBasicsCS.interfaces
                     }
                     seillaenge = value;
                 }
+                matrix.TranslateY(movementfactorY);
             }
         }
 
@@ -107,6 +117,7 @@ namespace DemoOpenGLBasicsCS.interfaces
                     }
                     seilposition = value;
                 }
+                matrix.TranslateXZ(movementfactorXZ);
             }
         }
 
@@ -117,7 +128,6 @@ namespace DemoOpenGLBasicsCS.interfaces
         public double MovementfactorXZ { get => movementfactorXZ;}
         public double MovementfactorY { get => movementfactorY;}
         public double Towerlength { get => towerheight;}
-        //public virtual IMovement Movement { get => this.movement; set => this.movement = value; }
 
         public virtual void setMovement(IMovement movement)
         {
@@ -136,8 +146,6 @@ namespace DemoOpenGLBasicsCS.interfaces
             GL.glRotated(-90, 1, 0, 0);
             GL.glRotated(drehwinkel, 0, 0, 1);
 
-            matrix.RotateY(drehwinkel);
-
             tower = new CylinderPart(towerheight);
             GLU.gluCylinder(tower.Element, 0.2, 0.2, tower.Length, 4, 10);
             GLU.gluQuadricDrawStyle(tower.Element, style);
@@ -148,7 +156,6 @@ namespace DemoOpenGLBasicsCS.interfaces
             GL.glRotated(90, 0, 0, 1);
             GLU.gluCylinder(boom.Element, 0.2, 0.2, boom.Length, 3, 10);
             GLU.gluQuadricDrawStyle(boom.Element, style);
-            matrix.TranslateXZ(movementfactorXZ);
 
             seil = new CylinderPart(seillaenge);
             GL.glTranslated(0.0, 0.0, Seilposition);
@@ -156,7 +163,6 @@ namespace DemoOpenGLBasicsCS.interfaces
             GL.glRotated(90, 1, 0, 0);
             GLU.gluCylinder(seil.Element, 0.01, 0.01, seil.Length, 20, 10);
             GLU.gluQuadricDrawStyle(seil.Element, style);
-            matrix.TranslateY(movementfactorY);
 
             GL.glTranslated(0.0, 0.0, Seillaenge);
             GLUT.glutWireSphere(0.1, 100, 150);
