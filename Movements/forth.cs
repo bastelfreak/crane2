@@ -2,11 +2,11 @@
 
 namespace DemoOpenGLBasicsCS.movements
 {
-    public class forth : interfaces.IMovement
+    public class Forth : interfaces.IMovement
     {
         public void move(ICrane element)
         {
-            element.Seilposition = element.Seilposition + 0.05f;
+            element.Ropeposition = element.Ropeposition + 0.05f;
         }
     }
 }

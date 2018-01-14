@@ -2,11 +2,13 @@
 
 namespace DemoOpenGLBasicsCS.movements
 {
-    public class left : interfaces.IMovement
+    public class Left : interfaces.IMovement
     {
         public void move(ICrane element)
         {
-            element.Drehwinkel = element.Drehwinkel - 5;
+            // rotating against the clock is positive
+            // https://www.mathebibel.de/drehmatrix
+            element.Drehwinkel = element.Drehwinkel + 5;
         }
     }
 }

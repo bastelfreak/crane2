@@ -1,71 +1,155 @@
-﻿using CsGL.OpenGL;
+using CsGL.OpenGL;
 using DemoOpenGLBasicsCS.models;
 using System;
+using System.Windows.Media.Media3D;
 
 namespace DemoOpenGLBasicsCS.interfaces
 {
     public abstract class ICrane
     {
-        private CylinderPart turm;
-        private CylinderPart ausleger;
-        private CylinderPart seil;
-        private float drehwinkel;
-        private float seillaenge;
-        private float seilposition;
+        private CylinderPart tower;
+        private CylinderPart boom;
+        private CylinderPart rope;
+        private double drehwinkel;
+        private float ropelength;
+        private float ropeposition;
+        private double movementfactorXZ;
+        private double movementfactorY;
+        private double towerheight;
+        private double boomlength;
         protected float colorred;
         protected float colorgreen;
         protected float colorblue;
-        private matrix matrix;
+        private Matrix matrix;
 
         public ICrane()
         {
-            matrix = new matrix();
-            drehwinkel = 0.0f;
-            seillaenge = 1.5f;
-            seilposition = 0.5f;
+            drehwinkel = 0.0;
+            ropelength = 1.5f;
+            ropeposition = 0.5f;
+            towerheight = 3;
+            boomlength = 2;
+            Vector3D InitialVector = new Vector3D
+            {
+                X = ropeposition,
+                Y = towerheight - ropelength,
+                Z = 0
+            };
+            matrix = new Matrix(InitialVector);
+            movementfactorY = 1;
+            movementfactorXZ = 1;
+            tower = new CylinderPart(towerheight);
+            boom = new CylinderPart(boomlength);
+            rope = new CylinderPart(ropelength);
         }
         protected uint style = 100012; //Übergabe für das GLU.GLU_FILL, damit dies einheitlich ist
 
-
-        public float Drehwinkel { get { return drehwinkel; } set { drehwinkel = value; } }
-        public float Seillaenge
+        public double Drehwinkel
         {
-            get { return seillaenge; }
+            get { return drehwinkel; }
             set
             {
-                if (value > turm.length - 0.3f)
+                // we need to ensure that we're never >360
+                // would mean we rotated too much to the left
+                if (value >= 360)
                 {
-                    seillaenge = (float)turm.length - 0.3F;
+                    drehwinkel = value - 360;
+
+                }
+                // we need to ensure that we're never < 360
+                // would mean we rotated too much to the right
+                else if (value <= -360){
+                    drehwinkel = value + 360;
+                }
+                else
+                {
+                    drehwinkel = value;
+                }
+                // recalculate the rotation on the vertical axis, because the rotation angle changed
+                matrix.RotateY(Degree2Radiant(drehwinkel));
+            }
+        }
+        public float Ropelength
+        {
+            get { return ropelength; }
+            set
+            {
+                if (value > tower.Length - 0.3f)
+                {
+                    ropelength = (float)tower.Length - 0.3F;
+                    movementfactorY = 1;
                 }
                 else if (value < 0.4f)
                 {
-                    seillaenge = 0.4F;
+                    ropelength = 0.4F;
+                    movementfactorY = 1;
                 }
                 else
                 {
-                    seillaenge = value;
+                    if (value > ropelength)
+                    {
+                        // we need to substract if the rope gets longer
+                        // we're interested in the length from the bottom to the ropeend, not the rope length
+                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) - 0.2f) / 100;
+                    } else
+                    {
+                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) + 0.2f) / 100;
+                    }
+                    if (movementfactorY <= 0.0f)
+                    {
+                        movementfactorY = 1;
+                    }
+                    ropelength = value;
                 }
+                matrix.TranslateY(movementfactorY);
             }
         }
 
-        public float Seilposition
+        public float Ropeposition
         {
-            get { return seilposition; }
+            get { return ropeposition; }
 
-            set {
-                if (value > ausleger.length)
-                    seilposition = (float)ausleger.length;
+            set
+            {
+                if (value > boom.Length)
+                {
+                    ropeposition = (float)boom.Length;
+                    // set it to 1, so the vector doesn't move
+                    movementfactorXZ = 1;
+                }
                 else if (value < 0.5f)
-                    seilposition = 0.5f;
+                {
+                    ropeposition = 0.5f;
+                    movementfactorXZ = 1;
+                }
                 else
-                    seilposition = value;
+                {
+                    // > 0 < 1 will move the ball to the middle
+                    // > 1 will move the ball away from the middle
+                    // < 0 we all die?
+                    // yeah we just died and need to add a condition that filters for 0...
+                    if (value > ropeposition) {
+                        movementfactorXZ = 100 / value * (value + 0.05f) / 100;
+                    }
+                    else
+                    {
+                        movementfactorXZ = 100 / value * (value - 0.05f) / 100;
+                    }
+                    ropeposition = value;
+                }
+                matrix.TranslateXZ(movementfactorXZ);
             }
         }
 
-        public IMovement movement { get; set; }
+       public IMovement movement { get; set; }
         public double X { get => matrix.X; }
         public double Y { get => matrix.Y; }
         public double Z { get => matrix.Z; }
+        public double Radiant { get => Degree2Radiant(drehwinkel); }
+        public double MovementfactorXZ { get => movementfactorXZ;}
+        public double MovementfactorY { get => movementfactorY;}
+        public double Towerheight { get => tower.Length;}
+        public double Boomlength { get => boom.Length; }
 
         public virtual void setMovement(IMovement movement)
         {
@@ -77,47 +161,55 @@ namespace DemoOpenGLBasicsCS.interfaces
             movement.move(this);
         }
 
-        public virtual void zeichnung()
+        public double Radiant2Degree(double radiant)
+        {
+            // we always need to return something, otherweise we don't show anything in the UI
+            // calculation fails if one of the factors is 0
+            if (radiant != 0)
+            {
+                radiant = (360 / 2 * Math.PI) * radiant;
+            }
+            return radiant;
+        }
+
+        private double Degree2Radiant(double degree)
+        {
+            // we always need to return something, otherweise we don't show anything in the UI
+            // calculation fails if one of the factors is 0
+            if (degree != 0)
+            {
+                degree = degree * (2 * Math.PI / 360);
+            }
+            return degree;
+        }
+
+        public virtual void Draw()
         { //Kran wird definiert und anschließend gezeichnet
             GL.glColor3f(colorred, colorgreen, colorblue);
-
             GL.glTranslated(0.0, 0.0, 0.0);
-            matrix.Startvektor = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, -6.0);
-
             GL.glRotated(-90, 1, 0, 0);
             GL.glRotated(drehwinkel, 0, 0, 1);
-            matrix.Matrixstart = System.Windows.Media.Media3D.Matrix3D.Multiply(new System.Windows.Media.Media3D.Matrix3D(1, 0, 0, 0, 0, Math.Cos(-90), -(Math.Sin(-90)), 0, 0, Math.Sin(-90), Math.Cos(-90), 0, 0, 0, 0, 1),
-                                                                                new System.Windows.Media.Media3D.Matrix3D(Math.Cos(drehwinkel), -(Math.Sin(drehwinkel)), 0, 0, Math.Sin(drehwinkel), Math.Cos(drehwinkel), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
 
-            turm = new CylinderPart(3);
-            GLU.gluCylinder(turm.element, 0.2, 0.2, turm.length, 4, 10);
-            GLU.gluQuadricDrawStyle(turm.element, style);
-            matrix.Matrixturm = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, turm.length);
+            tower = new CylinderPart(towerheight);
+            GLU.gluCylinder(tower.Element, 0.2, 0.2, tower.Length, 4, 10);
+            GLU.gluQuadricDrawStyle(tower.Element, style);
 
-            ausleger = new CylinderPart(2);
-            GL.glTranslated(0.0, 0.0, turm.length -0.2f);
+            boom = new CylinderPart(boomlength);
+            GL.glTranslated(0.0, 0.0, tower.Length - 0.2f);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 0, 0, 1);
-            GLU.gluCylinder(ausleger.element, 0.2, 0.2, ausleger.length, 3, 10);
-            GLU.gluQuadricDrawStyle(ausleger.element, style);
-            matrix.Matrixausleger = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, turm.length -0.2f);
-            matrix.Turmzuausleger = System.Windows.Media.Media3D.Matrix3D.Multiply(new System.Windows.Media.Media3D.Matrix3D(Math.Cos(90),0,Math.Sin(90),0,0,1,0,0,-(Math.Sin(90)),0,Math.Cos(90),0,0,0,0,1),
-                                                                                   new System.Windows.Media.Media3D.Matrix3D(Math.Cos(90), -(Math.Sin(90)), 0, 0, Math.Sin(90), Math.Cos(90), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
+            GLU.gluCylinder(boom.Element, 0.2, 0.2, boom.Length, 3, 10);
+            GLU.gluQuadricDrawStyle(boom.Element, style);
 
-            seil = new CylinderPart(seillaenge);
-            GL.glTranslated(0.0, 0.0, Seilposition);
+            rope = new CylinderPart(ropelength);
+            GL.glTranslated(0.0, 0.0, Ropeposition);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 1, 0, 0);
-            GLU.gluCylinder(seil.element, 0.01, 0.01, seil.length, 20, 10);
-            GLU.gluQuadricDrawStyle(seil.element, style);
-            matrix.Matrixseil = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, Seilposition);
-            matrix.Auslegerzuseil = System.Windows.Media.Media3D.Matrix3D.Multiply(new System.Windows.Media.Media3D.Matrix3D(Math.Cos(90), 0, Math.Sin(90), 0, 0, 1, 0, 0, -(Math.Sin(90)), 0, Math.Cos(90), 0, 0, 0, 0, 1),
-                                                                                    new System.Windows.Media.Media3D.Matrix3D(1, 0, 0, 0, 0, Math.Cos(90), -(Math.Sin(90)), 0, 0, Math.Sin(90), Math.Cos(90), 0, 0, 0, 0, 1));
-            matrix.SeilVector = new System.Windows.Media.Media3D.Vector3D(0.0, 0.0, Seillaenge);
+            GLU.gluCylinder(rope.Element, 0.01, 0.01, rope.Length, 20, 10);
+            GLU.gluQuadricDrawStyle(rope.Element, style);
 
-            GL.glTranslated(0.0, 0.0, Seillaenge);
+            GL.glTranslated(0.0, 0.0, Ropelength);
             GLUT.glutWireSphere(0.1, 100, 150);
-            matrix.zielpunkt();
-        }     
+        }
     }
 }

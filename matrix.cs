@@ -6,49 +6,82 @@ using System.Windows.Media.Media3D;
 
 namespace DemoOpenGLBasicsCS
 {
-    public class matrix
+    public class Matrix
     {
-        private Vector3D startvektor;
-        private Matrix3D matrixstart;
+        private Vector3D initialVector;
 
-        private Vector3D matrixturm;
-        private Matrix3D turmzuausleger;
 
-        private Vector3D matrixausleger;
-        private Matrix3D auslegerzuseil;
+        private Vector3D finalVector;
 
-        private Vector3D matrixseil;
-        private Vector3D seilVector;
+        public Vector3D InitialVector { get => initialVector; set => initialVector = value; }
+        public Vector3D FinalVector { get => finalVector;}
 
-        private double z;
-        private double x;
-        private double y;
+        public double X { get => finalVector.X; }
+        public double Y { get => finalVector.Y; }
+        public double Z { get => finalVector.Z; }
 
-        public Vector3D Matrixausleger { get => matrixausleger; set => matrixausleger = value; }
-        public Matrix3D Auslegerzuseil { get => auslegerzuseil; set => auslegerzuseil = value; }
-        public Vector3D Matrixseil { get => matrixseil; set => matrixseil = value; }
-        public Vector3D SeilVector { get => seilVector; set => seilVector = value; }
-        public Matrix3D Turmzuausleger { get => turmzuausleger; set => turmzuausleger = value; }
-        public Vector3D Matrixturm { get => matrixturm; set => matrixturm = value; }
-        public Matrix3D Matrixstart { get => matrixstart; set => matrixstart = value; }
-        public Vector3D Startvektor { get => startvektor; set => startvektor = value; }
-        public double X { get => x; }
-        public double Y { get => y; }
-        public double Z { get => z; }
 
-        public void zielpunkt()
+        public Matrix (Vector3D initialVector)
         {
-            Vector3D tempvector = Vector3D.Multiply(Startvektor, Matrixstart);
-            Vector3D tempvector2 = Vector3D.Add(tempvector, Matrixturm);
-            Vector3D tempvector3 = Vector3D.Multiply(tempvector2, Turmzuausleger);
-            Vector3D tempvector4 = Vector3D.Add(tempvector3, Matrixausleger);
-            Vector3D tempvector5 = Vector3D.Multiply(tempvector4, Auslegerzuseil);
-            Vector3D tempvector6 = Vector3D.Add(tempvector5, Matrixseil);
-            Vector3D resultvector = Vector3D.Add(tempvector6, SeilVector);
+            // this is the initial vector where our ball is hanging around
+            this.initialVector = initialVector;
+            // those coordinates represent the calculated position of the ball
+            // this is equal to the initial vector at the beginning
+            // allows us to display it in the GUI.cs
+            finalVector = initialVector;
+        }
 
-            x = Math.Round(resultvector.X, 2);
-            y = Math.Round(resultvector.Y, 2);
-            z = Math.Round(resultvector.Z, 2);
+        public Vector3D RotateY(double radiant)
+        {
+            // radiant is 0 in the initial rendering (before anyone pressed a button)
+            if (radiant != 0)
+            {
+                Matrix3D rotate_y_matrix = new Matrix3D(
+                        Math.Cos(radiant), 0, Math.Sin(radiant), 0,
+                        0, 1, 0, 0,
+                        -(Math.Sin(radiant)), 0, Math.Cos(radiant), 0,
+                        0, 0, 0, 1);
+                finalVector = Vector3D.Multiply(finalVector, rotate_y_matrix);
+            }
+            return finalVector;
+        }
+
+        public Vector3D TranslateXZ(double translate)
+        {
+            // translate is 1 in the initial rendering (before anyone pressed a button)
+            // nothing happens if translate is 1, it just costs performance to calculate
+            // also it should always be > 0
+            // > 0 < 1 will move to the middle
+            // > 1 will move to the outside
+            if (translate > 0 && translate != 1)
+            {
+                Matrix3D trans_matrix = new Matrix3D(
+                    translate, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, translate, 0,
+                    0, 0, 0, 1);
+                finalVector = Vector3D.Multiply(finalVector, trans_matrix);
+            }
+            return finalVector;
+        }
+
+        public Vector3D TranslateY(double translate)
+        {
+            // translate is 1 in the initial rendering (before anyone pressed a button)
+            // nothing happens if translate is 1, it just costs performance to calculate
+            // also it should always be > 0
+            // > 0 < 1 will move to the middle
+            // > 1 will move to the outside
+            if (translate > 0 && translate != 1)
+            {
+                Matrix3D trans_matrix = new Matrix3D(
+                1, 0, 0, 0,
+                0, translate, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1);
+                finalVector = Vector3D.Multiply(finalVector, trans_matrix);
+            }
+            return finalVector;
         }
     }
 }

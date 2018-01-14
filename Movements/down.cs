@@ -2,11 +2,11 @@
 
 namespace DemoOpenGLBasicsCS.movements
 {
-    public class down : interfaces.IMovement
+    public class Down : interfaces.IMovement
     {
         public void move(ICrane element)
         {
-            element.Seillaenge = element.Seillaenge + 0.2f;
+            element.Ropelength = element.Ropelength + 0.2f;
         }   
     }
 }
