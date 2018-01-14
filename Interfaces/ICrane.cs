@@ -141,23 +141,23 @@ namespace DemoOpenGLBasicsCS.interfaces
             matrix.RotateY(drehwinkel);
 
             turm = new CylinderPart(towerlength);
-            GLU.gluCylinder(turm.element, 0.2, 0.2, turm.Length, 4, 10);
-            GLU.gluQuadricDrawStyle(turm.element, style);
+            GLU.gluCylinder(turm.Element, 0.2, 0.2, turm.Length, 4, 10);
+            GLU.gluQuadricDrawStyle(turm.Element, style);
 
             ausleger = new CylinderPart(2);
             GL.glTranslated(0.0, 0.0, turm.Length - 0.2f);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 0, 0, 1);
-            GLU.gluCylinder(ausleger.element, 0.2, 0.2, ausleger.Length, 3, 10);
-            GLU.gluQuadricDrawStyle(ausleger.element, style);
+            GLU.gluCylinder(ausleger.Element, 0.2, 0.2, ausleger.Length, 3, 10);
+            GLU.gluQuadricDrawStyle(ausleger.Element, style);
             matrix.TranslateXZ(movementfactorXZ);
 
             seil = new CylinderPart(seillaenge);
             GL.glTranslated(0.0, 0.0, Seilposition);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 1, 0, 0);
-            GLU.gluCylinder(seil.element, 0.01, 0.01, seil.Length, 20, 10);
-            GLU.gluQuadricDrawStyle(seil.element, style);
+            GLU.gluCylinder(seil.Element, 0.01, 0.01, seil.Length, 20, 10);
+            GLU.gluQuadricDrawStyle(seil.Element, style);
             matrix.TranslateY(movementfactorY);
 
             GL.glTranslated(0.0, 0.0, Seillaenge);
