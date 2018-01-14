@@ -27,10 +27,12 @@ namespace DemoOpenGLBasicsCS.interfaces
             seillaenge = 1.5f;
             seilposition = 0.5f;
             towerlength = 3;
-            Vector3D InitialVector = new Vector3D();
-            InitialVector.X = seilposition;
-            InitialVector.Y = towerlength - seillaenge;
-            InitialVector.Z = 0;
+            Vector3D InitialVector = new Vector3D
+            {
+                X = seilposition,
+                Y = towerlength - seillaenge,
+                Z = 0
+            };
             matrix = new Matrix(InitialVector);
             movementfactorY = 1;
             movementfactorXZ = 1;
