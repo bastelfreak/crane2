@@ -31,9 +31,10 @@ namespace DemoOpenGLBasicsCS
             tbx_z.Text = Math.Round(oglView.Kran1.Z, 2).ToString();
             tbx_xz_movement.Text = oglView.Kran1.MovementfactorXZ.ToString();
             tbx_y_movement.Text = oglView.Kran1.MovementfactorY.ToString();
-            tbx_tri_x.Text = Convert.ToString(Math.Cos(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Seilposition);
-            tbx_tri_y.Text = Convert.ToString(oglView.Kran1.Towerlength - oglView.Kran1.Seillaenge);
-            tbx_tri_z.Text = Convert.ToString(Math.Sin(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Seilposition);
+            
+            tbx_tri_x.Text = Math.Round(Math.Cos(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Seilposition, 2).ToString();
+            tbx_tri_y.Text = Math.Round(oglView.Kran1.Towerlength - oglView.Kran1.Seillaenge, 2).ToString();
+            tbx_tri_z.Text = Math.Round(Math.Sin(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Seilposition, 2).ToString();
         }
 
         private void Movement(interfaces.IMovement b)
