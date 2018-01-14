@@ -7,7 +7,7 @@ namespace DemoOpenGLBasicsCS.interfaces
 {
     public abstract class ICrane
     {
-        private CylinderPart turm;
+        private CylinderPart tower;
         private CylinderPart boom;
         private CylinderPart seil;
         private double drehwinkel;
@@ -45,9 +45,9 @@ namespace DemoOpenGLBasicsCS.interfaces
             get { return seillaenge; }
             set
             {
-                if (value > turm.Length - 0.3f)
+                if (value > tower.Length - 0.3f)
                 {
-                    seillaenge = (float)turm.Length - 0.3F;
+                    seillaenge = (float)tower.Length - 0.3F;
                     movementfactorY = 1;
                 }
                 else if (value < 0.4f)
@@ -59,10 +59,10 @@ namespace DemoOpenGLBasicsCS.interfaces
                 {
                     if (value > seillaenge)
                     {
-                        movementfactorY = 100 / (turm.Length - value) * ((turm.Length - value) + 0.2f) / 100;
+                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) + 0.2f) / 100;
                     } else
                     {
-                        movementfactorY = 100 / (turm.Length - value) * ((turm.Length - value) - 0.2f) / 100;
+                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) - 0.2f) / 100;
                     }
                     if (movementfactorY <= 0.0f)
                     {
@@ -140,12 +140,12 @@ namespace DemoOpenGLBasicsCS.interfaces
 
             matrix.RotateY(drehwinkel);
 
-            turm = new CylinderPart(towerlength);
-            GLU.gluCylinder(turm.Element, 0.2, 0.2, turm.Length, 4, 10);
-            GLU.gluQuadricDrawStyle(turm.Element, style);
+            tower = new CylinderPart(towerlength);
+            GLU.gluCylinder(tower.Element, 0.2, 0.2, tower.Length, 4, 10);
+            GLU.gluQuadricDrawStyle(tower.Element, style);
 
             boom = new CylinderPart(2);
-            GL.glTranslated(0.0, 0.0, turm.Length - 0.2f);
+            GL.glTranslated(0.0, 0.0, tower.Length - 0.2f);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 0, 0, 1);
             GLU.gluCylinder(boom.Element, 0.2, 0.2, boom.Length, 3, 10);
