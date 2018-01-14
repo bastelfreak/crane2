@@ -10,7 +10,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         private CylinderPart tower;
         private CylinderPart boom;
         private CylinderPart rope;
-        private double drehwinkel;
+        private double rotationangle;
         private float ropelength;
         private float ropeposition;
         private double movementfactorXZ;
@@ -24,7 +24,7 @@ namespace DemoOpenGLBasicsCS.interfaces
 
         public ICrane()
         {
-            drehwinkel = 0.0;
+            rotationangle = 0.0;
             ropelength = 1.5f;
             ropeposition = 0.5f;
             towerheight = 3;
@@ -46,27 +46,27 @@ namespace DemoOpenGLBasicsCS.interfaces
 
         public double Drehwinkel
         {
-            get { return drehwinkel; }
+            get { return rotationangle; }
             set
             {
                 // we need to ensure that we're never >360
                 // would mean we rotated too much to the left
                 if (value >= 360)
                 {
-                    drehwinkel = value - 360;
+                    rotationangle = value - 360;
 
                 }
                 // we need to ensure that we're never < 360
                 // would mean we rotated too much to the right
                 else if (value <= -360){
-                    drehwinkel = value + 360;
+                    rotationangle = value + 360;
                 }
                 else
                 {
-                    drehwinkel = value;
+                    rotationangle = value;
                 }
                 // recalculate the rotation on the vertical axis, because the rotation angle changed
-                matrix.RotateY(Degree2Radiant(drehwinkel));
+                matrix.RotateY(Degree2Radiant(rotationangle));
             }
         }
         public float Ropelength
@@ -145,7 +145,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         public double X { get => matrix.X; }
         public double Y { get => matrix.Y; }
         public double Z { get => matrix.Z; }
-        public double Radiant { get => Degree2Radiant(drehwinkel); }
+        public double Radiant { get => Degree2Radiant(rotationangle); }
         public double MovementfactorXZ { get => movementfactorXZ;}
         public double MovementfactorY { get => movementfactorY;}
         public double Towerheight { get => tower.Length;}
@@ -184,11 +184,11 @@ namespace DemoOpenGLBasicsCS.interfaces
         }
 
         public virtual void Draw()
-        { //Kran wird definiert und anschließend gezeichnet
+        { //at this point the crane will be drawing
             GL.glColor3f(colorred, colorgreen, colorblue);
             GL.glTranslated(0.0, 0.0, 0.0);
             GL.glRotated(-90, 1, 0, 0);
-            GL.glRotated(drehwinkel, 0, 0, 1);
+            GL.glRotated(rotationangle, 0, 0, 1);
 
             tower = new CylinderPart(towerheight);
             GLU.gluCylinder(tower.Element, 0.2, 0.2, tower.Length, 4, 10);

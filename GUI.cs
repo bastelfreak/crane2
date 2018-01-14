@@ -20,7 +20,7 @@ namespace DemoOpenGLBasicsCS
             oglView.Dock = DockStyle.Fill;
             panel.Controls.Add(oglView);
             panel.Focus();
-            this.buttonDown = false;
+            this.buttonDown = false; //needed for press the button and can hold it. It will be used in every button feature.
             Update_positions();
         }
 
