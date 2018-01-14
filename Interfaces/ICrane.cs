@@ -11,8 +11,8 @@ namespace DemoOpenGLBasicsCS.interfaces
         private CylinderPart boom;
         private CylinderPart rope;
         private double rotationangle;
-        private float ropelength;
-        private float ropeposition;
+        private double ropelength;
+        private double ropeposition;
         private double movementfactorXZ;
         private double movementfactorY;
         private double towerheight;
@@ -44,7 +44,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         }
         protected uint style = 100012; //Übergabe für das GLU.GLU_FILL, damit dies einheitlich ist
 
-        public double Drehwinkel
+        public double Rotationangle
         {
             get { return rotationangle; }
             set

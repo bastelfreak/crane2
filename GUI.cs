@@ -32,10 +32,10 @@ namespace DemoOpenGLBasicsCS
             tbx_xz_movement.Text = Math.Round(oglView.Kran1.MovementfactorXZ, 3).ToString();
             tbx_y_movement.Text = Math.Round(oglView.Kran1.MovementfactorY, 3).ToString();
             
-            tbx_tri_x.Text = Math.Round(Math.Cos(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Ropeposition, 3).ToString();
+            tbx_tri_x.Text = Math.Round(Math.Cos(Math.PI * oglView.Kran1.Rotationangle / 180) * oglView.Kran1.Ropeposition, 3).ToString();
             tbx_tri_y.Text = Math.Round(oglView.Kran1.Towerheight - oglView.Kran1.Ropelength, 3).ToString();
-            tbx_tri_z.Text = Math.Round(Math.Sin(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Ropeposition, 3).ToString();
-            tbx_alpha.Text = oglView.Kran1.Drehwinkel.ToString();
+            tbx_tri_z.Text = Math.Round(Math.Sin(Math.PI * oglView.Kran1.Rotationangle / 180) * oglView.Kran1.Ropeposition, 3).ToString();
+            tbx_alpha.Text = oglView.Kran1.Rotationangle.ToString();
             tbx_rad.Text = Math.Round(oglView.Kran1.Radiant, 3).ToString();
             tbx_boomlength.Text = Math.Round(oglView.Kran1.Boomlength, 3).ToString();
             tbx_towerheight.Text = Math.Round(oglView.Kran1.Towerheight, 3).ToString();

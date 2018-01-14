@@ -8,7 +8,7 @@ namespace DemoOpenGLBasicsCS.movements
         {
             // rotating against the clock is positive
             // https://www.mathebibel.de/drehmatrix
-            element.Drehwinkel = element.Drehwinkel + 5;
+            element.Rotationangle = element.Rotationangle + 5;
         }
     }
 }

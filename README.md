@@ -52,20 +52,30 @@
 - complete rewrite of matrix class
 - complete rewrite of all matrix/vector operations
 
+<<<<<<< HEAD
 
 ## Toni Eckardt was here!!!
 - *GERMAN* Hab auf kleine Tippfehler hingewiesen
 - moralische unterstützung
 - fragen gestellt
 
+=======
+>>>>>>> 967181808a5566807870c5ef022b35f44526e018
 ## Changes by Marcel Reuter
 
 - add comments, for undefined code
 - add radiant and degres for calculating Matrics
 - change "drehwinkel" into rotationangle
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 967181808a5566807870c5ef022b35f44526e018
 ## Changes by Mario Bost
 
 - change translation for the first vector
 - change float into double for axes results
+<<<<<<< HEAD
 
+=======
+>>>>>>> 967181808a5566807870c5ef022b35f44526e018
