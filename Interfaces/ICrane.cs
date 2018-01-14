@@ -25,8 +25,8 @@ namespace DemoOpenGLBasicsCS.interfaces
         public ICrane()
         {
             rotationangle = 0.0;
-            ropelength = 1.5f;
-            ropeposition = 0.5f;
+            ropelength = 1.5;
+            ropeposition = 0.5;
             towerheight = 3;
             boomlength = 2;
             Vector3D InitialVector = new Vector3D
@@ -74,14 +74,14 @@ namespace DemoOpenGLBasicsCS.interfaces
             get { return ropelength; }
             set
             {
-                if (value > tower.Length - 0.3f)
+                if (value > tower.Length - 0.3)
                 {
-                    ropelength = tower.Length - 0.3F;
+                    ropelength = tower.Length - 0.3;
                     movementfactorY = 1;
                 }
-                else if (value < 0.4f)
+                else if (value < 0.4)
                 {
-                    ropelength = 0.4F;
+                    ropelength = 0.4;
                     movementfactorY = 1;
                 }
                 else
@@ -90,12 +90,12 @@ namespace DemoOpenGLBasicsCS.interfaces
                     {
                         // we need to substract if the rope gets longer
                         // we're interested in the length from the bottom to the ropeend, not the rope length
-                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) - 0.2f) / 100;
+                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) - 0.2) / 100;
                     } else
                     {
-                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) + 0.2f) / 100;
+                        movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) + 0.2) / 100;
                     }
-                    if (movementfactorY <= 0.0f)
+                    if (movementfactorY <= 0.0)
                     {
                         movementfactorY = 1;
                     }
@@ -117,9 +117,9 @@ namespace DemoOpenGLBasicsCS.interfaces
                     // set it to 1, so the vector doesn't move
                     movementfactorXZ = 1;
                 }
-                else if (value < 0.5f)
+                else if (value < 0.5)
                 {
-                    ropeposition = 0.5f;
+                    ropeposition = 0.5;
                     movementfactorXZ = 1;
                 }
                 else
@@ -129,11 +129,11 @@ namespace DemoOpenGLBasicsCS.interfaces
                     // < 0 we all die?
                     // yeah we just died and need to add a condition that filters for 0...
                     if (value > ropeposition) {
-                        movementfactorXZ = 100 / value * (value + 0.05f) / 100;
+                        movementfactorXZ = 100 / value * (value + 0.05) / 100;
                     }
                     else
                     {
-                        movementfactorXZ = 100 / value * (value - 0.05f) / 100;
+                        movementfactorXZ = 100 / value * (value - 0.05) / 100;
                     }
                     ropeposition = value;
                 }
