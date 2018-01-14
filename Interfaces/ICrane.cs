@@ -141,7 +141,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             }
         }
 
-       public IMovement movement { get; set; }
+        public IMovement movement { get; set; }
         public double X { get => matrix.X; }
         public double Y { get => matrix.Y; }
         public double Z { get => matrix.Z; }
@@ -211,5 +211,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             GL.glTranslated(0.0, 0.0, Ropelength);
             GLUT.glutWireSphere(0.1, 100, 150);
         }
+
+
     }
 }
