@@ -492,7 +492,6 @@
             // 
             // btn_goto_position
             // 
-            this.btn_goto_position.Enabled = false;
             this.btn_goto_position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_goto_position.Location = new System.Drawing.Point(1026, 458);
             this.btn_goto_position.Name = "btn_goto_position";

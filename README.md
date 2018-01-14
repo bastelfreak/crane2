@@ -51,6 +51,7 @@
 - move startpoint into matrix class
 - complete rewrite of matrix class
 - complete rewrite of all matrix/vector operations
+- Allow user to enter new vector, navigate to it (based on logic from Holger, I added the conversion from the vector to polar coordinates)
 
 ## Toni Eckardt was here!!!
 - *GERMAN* Hab auf kleine Tippfehler hingewiesen

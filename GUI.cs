@@ -17,7 +17,7 @@ namespace DemoOpenGLBasicsCS
         private double delta_ropeposition;
         private double delta_ropelenght;
 
-        private double mark_drehwinkel;
+        private double mark_rotationangle;
         private double mark_ropelength;
         private double mark_ropeposition;
 
@@ -55,14 +55,14 @@ namespace DemoOpenGLBasicsCS
 
         private void Movement(interfaces.IMovement b)
         {
-            //while (buttonDown)
-            //{
+            while (buttonDown)
+            {
                 oglView.Kran1.setMovement(b);
                 oglView.Kran1.move();
                 Redraw();
                 Thread.Sleep(50);
                 Application.DoEvents();
-            //}
+            }
         }
 
         private void Redraw()
@@ -159,19 +159,28 @@ namespace DemoOpenGLBasicsCS
 
         public void btn_mark_position_Click(object sender, EventArgs e)
         {
-            btn_goto_position.Enabled = true;
+            
+
+            // write the current vectors into our fields
             tbx_mark_x.Text = tbx_tri_x.Text;
             tbx_mark_y.Text = tbx_tri_y.Text;
             tbx_mark_z.Text = tbx_tri_z.Text;
 
-            mark_drehwinkel = oglView.Kran1.Rotationangle;
-            mark_ropeposition = oglView.Kran1.Ropeposition;
-            mark_ropelength = oglView.Kran1.Ropelength;
+            
     }
 
         public void btn_goto_position_Click(object sender, EventArgs e)
         {
-            delta_angle = ((mark_drehwinkel - oglView.Kran1.Rotationangle) / iterations);
+            // calculate the current position as polar coordinates
+            Double x = Convert.ToDouble(tbx_mark_x.Text);
+            Double y = Convert.ToDouble(tbx_mark_y.Text);
+            Double z = Convert.ToDouble(tbx_mark_z.Text);
+
+            mark_ropeposition = Math.Sqrt(Math.Pow(x, x) + Math.Pow(z, z));
+            mark_ropelength = oglView.Kran1.Towerheight - y;
+            mark_rotationangle = Math.Asin(z / mark_ropeposition);
+
+            delta_angle = ((mark_rotationangle - oglView.Kran1.Rotationangle) / iterations);
             delta_ropeposition = ((mark_ropeposition - oglView.Kran1.Ropeposition) / iterations);
             delta_ropelenght = ((mark_ropelength - oglView.Kran1.Ropelength)/ iterations);
 
