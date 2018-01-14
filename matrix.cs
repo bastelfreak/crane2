@@ -67,6 +67,9 @@ namespace DemoOpenGLBasicsCS
 
         public Vector3D TranslateY(double translate)
         {
+            // okay okay, in the past, translate was a factor that described the rope movement
+            // now translate is the new Y value for the vector, we can simply calculate it
+
             // translate is 1 in the initial rendering (before anyone pressed a button)
             // nothing happens if translate is 1, it just costs performance to calculate
             // also it should always be > 0
@@ -74,12 +77,13 @@ namespace DemoOpenGLBasicsCS
             // > 1 will move the ball up
             if (translate > 0 && translate != 1)
             {
-                Matrix3D trans_matrix = new Matrix3D(
+                /*Matrix3D trans_matrix = new Matrix3D(
                 1, 0, 0, 0,
                 0, translate, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1);
-                finalVector = Vector3D.Multiply(finalVector, trans_matrix);
+                finalVector = Vector3D.Multiply(finalVector, trans_matrix);*/
+                finalVector.Y = translate;
             }
             return finalVector;
         }

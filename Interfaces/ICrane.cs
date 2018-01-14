@@ -101,7 +101,7 @@ namespace DemoOpenGLBasicsCS.interfaces
                     }
                     ropelength = value;
                 }
-                matrix.TranslateY(movementfactorY);
+                matrix.TranslateY(tower.Length - ropelength);
             }
         }
 
