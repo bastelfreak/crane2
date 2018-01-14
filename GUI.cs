@@ -59,13 +59,18 @@ namespace DemoOpenGLBasicsCS
             //{
                 oglView.Kran1.setMovement(b);
                 oglView.Kran1.move();
-                oglView.Kran1.Draw();
-                oglView.Refresh();
-                oglView.Focus();
-                Update_positions();
+                Redraw();
                 Thread.Sleep(50);
                 Application.DoEvents();
             //}
+        }
+
+        private void Redraw()
+        {
+            oglView.Kran1.Draw();
+            oglView.Refresh();
+            oglView.Focus();
+            Update_positions();
         }
 
         private void btn_links_MouseDown(object sender, MouseEventArgs e)
@@ -175,12 +180,7 @@ namespace DemoOpenGLBasicsCS
                 oglView.Kran1.Rotationangle = oglView.Kran1.Rotationangle + delta_angle;
                 oglView.Kran1.Ropeposition = oglView.Kran1.Ropeposition + delta_ropeposition;
                 oglView.Kran1.Ropelength = oglView.Kran1.Ropelength + delta_ropelenght;
-
-                oglView.Kran1.Draw();
-                oglView.Refresh();
-                oglView.Focus();
-                Update_positions();
-
+                Redraw();
                 Thread.Sleep(50);
             }
         }
