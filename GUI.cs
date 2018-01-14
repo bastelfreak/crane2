@@ -168,29 +168,61 @@ namespace DemoOpenGLBasicsCS
 
             
     }
+        public Boolean ValidateAgainstZero (string input)
+        {
+            return input == "0" ? false : true;
+        }
+
+        private Boolean ValidateAgainstEmptyString (string input)
+        {
+            return input == "" ? false : true;
+        }
 
         public void btn_goto_position_Click(object sender, EventArgs e)
         {
-            // calculate the current position as polar coordinates
-            Double x = Convert.ToDouble(tbx_mark_x.Text);
-            Double y = Convert.ToDouble(tbx_mark_y.Text);
-            Double z = Convert.ToDouble(tbx_mark_z.Text);
-
-            mark_ropeposition = Math.Sqrt(Math.Pow(x, x) + Math.Pow(z, z));
-            mark_ropelength = oglView.Kran1.Towerheight - y;
-            mark_rotationangle = Math.Asin(z / mark_ropeposition);
-
-            delta_angle = ((mark_rotationangle - oglView.Kran1.Rotationangle) / iterations);
-            delta_ropeposition = ((mark_ropeposition - oglView.Kran1.Ropeposition) / iterations);
-            delta_ropelenght = ((mark_ropelength - oglView.Kran1.Ropelength)/ iterations);
-
-            for (int i = 1; i <= iterations; i++)
+            Boolean nope = true;
+            foreach (string input in new String[] { tbx_mark_x.Text, tbx_mark_y.Text, tbx_mark_z.Text })
             {
-                oglView.Kran1.Rotationangle = oglView.Kran1.Rotationangle + delta_angle;
-                oglView.Kran1.Ropeposition = oglView.Kran1.Ropeposition + delta_ropeposition;
-                oglView.Kran1.Ropelength = oglView.Kran1.Ropelength + delta_ropelenght;
-                Redraw();
-                Thread.Sleep(50);
+                if (ValidateAgainstEmptyString(input) == false)
+                {
+                    MessageBox.Show("Missing input");
+                }
+                else if (ValidateAgainstZero(input) == false)
+                {
+                    MessageBox.Show("Something is 0...");
+                }
+                // todo: validate if the coordinates are withing our working area
+                else
+                {
+                    nope = false;
+                }
+            }
+            // save the vector from the textboxes into vars
+            // we need them a few this this allows us to easier access them
+
+            if (nope == false)
+            {
+                Double x = Convert.ToDouble(tbx_mark_x.Text);
+                Double y = Convert.ToDouble(tbx_mark_y.Text);
+                Double z = Convert.ToDouble(tbx_mark_z.Text.ToString());
+
+                // calculate the current position as polar coordinates
+                mark_ropeposition = Math.Sqrt(Math.Pow(x, x) + Math.Pow(z, z));
+                mark_ropelength = oglView.Kran1.Towerheight - y;
+                mark_rotationangle = Math.Asin(z / mark_ropeposition);
+
+                delta_angle = ((mark_rotationangle - oglView.Kran1.Rotationangle) / iterations);
+                delta_ropeposition = ((mark_ropeposition - oglView.Kran1.Ropeposition) / iterations);
+                delta_ropelenght = ((mark_ropelength - oglView.Kran1.Ropelength) / iterations);
+
+                for (int i = 1; i <= iterations; i++)
+                {
+                    oglView.Kran1.Rotationangle = oglView.Kran1.Rotationangle + delta_angle;
+                    oglView.Kran1.Ropeposition = oglView.Kran1.Ropeposition + delta_ropeposition;
+                    oglView.Kran1.Ropelength = oglView.Kran1.Ropelength + delta_ropelenght;
+                    Redraw();
+                    Thread.Sleep(50);
+                }
             }
         }
     }
