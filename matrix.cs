@@ -70,8 +70,8 @@ namespace DemoOpenGLBasicsCS
             // translate is 1 in the initial rendering (before anyone pressed a button)
             // nothing happens if translate is 1, it just costs performance to calculate
             // also it should always be > 0
-            // > 0 < 1 will move to the middle
-            // > 1 will move to the outside
+            // > 0 < 1 will move the ball down
+            // > 1 will move the ball up
             if (translate > 0 && translate != 1)
             {
                 Matrix3D trans_matrix = new Matrix3D(
