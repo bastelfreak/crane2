@@ -51,6 +51,8 @@
 - move startpoint into matrix class
 - complete rewrite of matrix class
 - complete rewrite of all matrix/vector operations
+- Allow user to enter new vector, navigate to it (based on logic from Holger, I added the conversion from the vector to polar coordinates)
+- simple validation for user input
 
 ## Toni Eckardt was here!!!
 - *GERMAN* Hab auf kleine Tippfehler hingewiesen
@@ -72,3 +74,4 @@
 
 - Position of crane can be saved
 - Crane can go way back to saved position (Inverse Kinematics)
+- Calculate the current vektor of the ball by using trigonometry
