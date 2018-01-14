@@ -26,21 +26,21 @@ namespace DemoOpenGLBasicsCS
 
         private void Update_positions()
         {
-            tbx_x.Text = Math.Round(oglView.Kran1.X, 2).ToString();
-            tbx_y.Text = Math.Round(oglView.Kran1.Y, 2).ToString();
-            tbx_z.Text = Math.Round(oglView.Kran1.Z, 2).ToString();
-            tbx_xz_movement.Text = Math.Round(oglView.Kran1.MovementfactorXZ, 2).ToString();
-            tbx_y_movement.Text = Math.Round(oglView.Kran1.MovementfactorY, 2).ToString();
+            tbx_x.Text = Math.Round(oglView.Kran1.X, 3).ToString();
+            tbx_y.Text = Math.Round(oglView.Kran1.Y, 3).ToString();
+            tbx_z.Text = Math.Round(oglView.Kran1.Z, 3).ToString();
+            tbx_xz_movement.Text = Math.Round(oglView.Kran1.MovementfactorXZ, 3).ToString();
+            tbx_y_movement.Text = Math.Round(oglView.Kran1.MovementfactorY, 3).ToString();
             
-            tbx_tri_x.Text = Math.Round(Math.Cos(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Ropeposition, 2).ToString();
-            tbx_tri_y.Text = Math.Round(oglView.Kran1.Towerheight - oglView.Kran1.Ropelength, 2).ToString();
-            tbx_tri_z.Text = Math.Round(Math.Sin(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Ropeposition, 2).ToString();
+            tbx_tri_x.Text = Math.Round(Math.Cos(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Ropeposition, 3).ToString();
+            tbx_tri_y.Text = Math.Round(oglView.Kran1.Towerheight - oglView.Kran1.Ropelength, 3).ToString();
+            tbx_tri_z.Text = Math.Round(Math.Sin(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Ropeposition, 3).ToString();
             tbx_alpha.Text = oglView.Kran1.Drehwinkel.ToString();
-            tbx_rad.Text = Math.Round(oglView.Kran1.Radiant, 2).ToString();
-            tbx_boomlength.Text = Math.Round(oglView.Kran1.Boomlength, 2).ToString();
-            tbx_towerheight.Text = Math.Round(oglView.Kran1.Towerheight, 2).ToString();
-            tbx_ropelength.Text = Math.Round(oglView.Kran1.Ropelength, 2).ToString();
-            tbx_ropeposition.Text = Math.Round(oglView.Kran1.Ropeposition, 2).ToString();
+            tbx_rad.Text = Math.Round(oglView.Kran1.Radiant, 3).ToString();
+            tbx_boomlength.Text = Math.Round(oglView.Kran1.Boomlength, 3).ToString();
+            tbx_towerheight.Text = Math.Round(oglView.Kran1.Towerheight, 3).ToString();
+            tbx_ropelength.Text = Math.Round(oglView.Kran1.Ropelength, 3).ToString();
+            tbx_ropeposition.Text = Math.Round(oglView.Kran1.Ropeposition, 3).ToString();
         }
 
         private void Movement(interfaces.IMovement b)
