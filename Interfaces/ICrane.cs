@@ -128,11 +128,6 @@ namespace DemoOpenGLBasicsCS.interfaces
             movement.move(this);
         }
 
-        private double Degree2Radiant(double degree)
-        {
-            return degree * Math.PI / 180;
-        }
-
         public virtual void zeichnung()
         { //Kran wird definiert und anschließend gezeichnet
             GL.glColor3f(colorred, colorgreen, colorblue);
