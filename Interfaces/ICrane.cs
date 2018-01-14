@@ -8,7 +8,7 @@ namespace DemoOpenGLBasicsCS.interfaces
     public abstract class ICrane
     {
         private CylinderPart turm;
-        private CylinderPart ausleger;
+        private CylinderPart boom;
         private CylinderPart seil;
         private double drehwinkel;
         private float seillaenge;
@@ -79,9 +79,9 @@ namespace DemoOpenGLBasicsCS.interfaces
 
             set
             {
-                if (value > ausleger.Length)
+                if (value > boom.Length)
                 {
-                    seilposition = (float)ausleger.Length;
+                    seilposition = (float)boom.Length;
                     // set it to 1, so the vector doesn't move
                     movementfactorXZ = 1;
                 }
@@ -144,12 +144,12 @@ namespace DemoOpenGLBasicsCS.interfaces
             GLU.gluCylinder(turm.Element, 0.2, 0.2, turm.Length, 4, 10);
             GLU.gluQuadricDrawStyle(turm.Element, style);
 
-            ausleger = new CylinderPart(2);
+            boom = new CylinderPart(2);
             GL.glTranslated(0.0, 0.0, turm.Length - 0.2f);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 0, 0, 1);
-            GLU.gluCylinder(ausleger.Element, 0.2, 0.2, ausleger.Length, 3, 10);
-            GLU.gluQuadricDrawStyle(ausleger.Element, style);
+            GLU.gluCylinder(boom.Element, 0.2, 0.2, boom.Length, 3, 10);
+            GLU.gluQuadricDrawStyle(boom.Element, style);
             matrix.TranslateXZ(movementfactorXZ);
 
             seil = new CylinderPart(seillaenge);
