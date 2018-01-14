@@ -104,8 +104,12 @@ namespace DemoOpenGLBasicsCS
             // translate is 0 in the initial rendering (before anyone pressed a button)
             if (translate != 0)
             {
-                Vector3D stretched = Vector3D.Multiply(new Vector3D(finalVector.X, 0, finalVector.Z), translate);
-                finalVector = Vector3D.Add(stretched, new Vector3D(0, finalVector.Y, 0));
+                Matrix3D trans_matrix = new Matrix3D(
+                    translate, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, translate, 0,
+                    0, 0, 0, 1);
+                finalVector = Vector3D.Multiply(finalVector, trans_matrix);
             }
             return finalVector;
         }
@@ -115,8 +119,12 @@ namespace DemoOpenGLBasicsCS
             // translate is 0 in the initial rendering (before anyone pressed a button)
             if (translate != 0)
             {
-                Vector3D stretched = Vector3D.Multiply(new Vector3D(0, finalVector.Y, 0), translate);
-                finalVector = Vector3D.Add(stretched, new Vector3D(finalVector.X, 0, finalVector.Z));
+                Matrix3D trans_matrix = new Matrix3D(
+                1, 0, 0, 0,
+                0, translate, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1);
+                finalVector = Vector3D.Multiply(finalVector, trans_matrix);
             }
             return finalVector;
         }
