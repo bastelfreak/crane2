@@ -15,7 +15,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         private float seilposition;
         private double movementfactorXZ;
         private double movementfactorY;
-        private double towerlength;
+        private double towerheight;
         private double boomlength;
         protected float colorred;
         protected float colorgreen;
@@ -27,12 +27,12 @@ namespace DemoOpenGLBasicsCS.interfaces
             drehwinkel = 0.0;
             seillaenge = 1.5f;
             seilposition = 0.5f;
-            towerlength = 3;
+            towerheight = 3;
             boomlength = 2;
             Vector3D InitialVector = new Vector3D
             {
                 X = seilposition,
-                Y = towerlength - seillaenge,
+                Y = towerheight - seillaenge,
                 Z = 0
             };
             matrix = new Matrix(InitialVector);
@@ -116,7 +116,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         public double Z { get => matrix.Z; }
         public double MovementfactorXZ { get => movementfactorXZ;}
         public double MovementfactorY { get => movementfactorY;}
-        public double Towerlength { get => towerlength;}
+        public double Towerlength { get => towerheight;}
         //public virtual IMovement Movement { get => this.movement; set => this.movement = value; }
 
         public virtual void setMovement(IMovement movement)
@@ -138,7 +138,7 @@ namespace DemoOpenGLBasicsCS.interfaces
 
             matrix.RotateY(drehwinkel);
 
-            tower = new CylinderPart(towerlength);
+            tower = new CylinderPart(towerheight);
             GLU.gluCylinder(tower.Element, 0.2, 0.2, tower.Length, 4, 10);
             GLU.gluQuadricDrawStyle(tower.Element, style);
 
