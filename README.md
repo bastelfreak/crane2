@@ -29,12 +29,7 @@
 
 ## known bugs
 
-x is y?
-y is z?
-z is x??
-
-'turn left' turns it right
-'turn right' turns it left
+- Trigonometric operations are slightly different to matrix operations
 
 ## Changes by Tim Meusel
 
@@ -49,3 +44,5 @@ z is x??
 - fix left/right rotation (it was twisted)
 - move matrices into matrix class
 - move startpoint into matrix class
+- complete rewrite of matrix class
+- complete rewrite of all matrix/vector operations
