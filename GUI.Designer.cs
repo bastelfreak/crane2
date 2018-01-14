@@ -97,7 +97,6 @@
             this.label1.Size = new System.Drawing.Size(157, 25);
             this.label1.TabIndex = 3;
             this.label1.Text = "Drehbewegung";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -230,7 +229,6 @@
             this.tbx_xz_movement.Name = "tbx_xz_movement";
             this.tbx_xz_movement.Size = new System.Drawing.Size(100, 20);
             this.tbx_xz_movement.TabIndex = 17;
-            this.tbx_xz_movement.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // tbx_y_movement
             // 
@@ -366,7 +364,6 @@
             this.Controls.Add(this.panel);
             this.Name = "GUI";
             this.Text = "OpenGL Demo";
-            this.Load += new System.EventHandler(this.GUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
