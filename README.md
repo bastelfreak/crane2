@@ -72,3 +72,4 @@
 
 - Position of crane can be saved
 - Crane can go way back to saved position (Inverse Kinematics)
+- Calculate the current vektor of the ball by using trigonometry
