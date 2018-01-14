@@ -54,8 +54,12 @@ namespace DemoOpenGLBasicsCS
 
         public Vector3D TranslateXZ(double translate)
         {
-            // translate is 0 in the initial rendering (before anyone pressed a button)
-            if (translate != 0)
+            // translate is 1 in the initial rendering (before anyone pressed a button)
+            // nothing happens if translate is 1, it just costs performance to calculate
+            // also it should always be > 0
+            // > 0 < 1 will move to the middle
+            // > 1 will move to the outside
+            if (translate > 0 && translate != 1)
             {
                 Matrix3D trans_matrix = new Matrix3D(
                     translate, 0, 0, 0,
@@ -69,8 +73,12 @@ namespace DemoOpenGLBasicsCS
 
         public Vector3D TranslateY(double translate)
         {
-            // translate is 0 in the initial rendering (before anyone pressed a button)
-            if (translate != 0)
+            // translate is 1 in the initial rendering (before anyone pressed a button)
+            // nothing happens if translate is 1, it just costs performance to calculate
+            // also it should always be > 0
+            // > 0 < 1 will move to the middle
+            // > 1 will move to the outside
+            if (translate > 0 && translate != 1)
             {
                 Matrix3D trans_matrix = new Matrix3D(
                 1, 0, 0, 0,

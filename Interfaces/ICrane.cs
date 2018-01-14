@@ -110,13 +110,14 @@ namespace DemoOpenGLBasicsCS.interfaces
             }
         }
 
-        public IMovement movement { get; set; }
+       public IMovement movement { get; set; }
         public double X { get => matrix.X; }
         public double Y { get => matrix.Y; }
         public double Z { get => matrix.Z; }
         public double MovementfactorXZ { get => movementfactorXZ;}
         public double MovementfactorY { get => movementfactorY;}
         public double Towerlength { get => towerlength;}
+        //public virtual IMovement Movement { get => this.movement; set => this.movement = value; }
 
         public virtual void setMovement(IMovement movement)
         {
