@@ -9,10 +9,10 @@ namespace DemoOpenGLBasicsCS.interfaces
     {
         private CylinderPart tower;
         private CylinderPart boom;
-        private CylinderPart seil;
+        private CylinderPart rope;
         private double drehwinkel;
-        private float seillaenge;
-        private float seilposition;
+        private float ropelength;
+        private float ropeposition;
         private double movementfactorXZ;
         private double movementfactorY;
         private double towerheight;
@@ -25,19 +25,22 @@ namespace DemoOpenGLBasicsCS.interfaces
         public ICrane()
         {
             drehwinkel = 0.0;
-            seillaenge = 1.5f;
-            seilposition = 0.5f;
+            ropelength = 1.5f;
+            ropeposition = 0.5f;
             towerheight = 3;
             boomlength = 2;
             Vector3D InitialVector = new Vector3D
             {
-                X = seilposition,
-                Y = towerheight - seillaenge,
+                X = ropeposition,
+                Y = towerheight - ropelength,
                 Z = 0
             };
             matrix = new Matrix(InitialVector);
             movementfactorY = 1;
             movementfactorXZ = 1;
+            tower = new CylinderPart(towerheight);
+            boom = new CylinderPart(boomlength);
+            rope = new CylinderPart(ropelength);
         }
         protected uint style = 100012; //Übergabe für das GLU.GLU_FILL, damit dies einheitlich ist
 
@@ -66,24 +69,24 @@ namespace DemoOpenGLBasicsCS.interfaces
                 matrix.RotateY(Degree2Radiant(drehwinkel));
             }
         }
-        public float Seillaenge
+        public float Ropelength
         {
-            get { return seillaenge; }
+            get { return ropelength; }
             set
             {
                 if (value > tower.Length - 0.3f)
                 {
-                    seillaenge = (float)tower.Length - 0.3F;
+                    ropelength = (float)tower.Length - 0.3F;
                     movementfactorY = 1;
                 }
                 else if (value < 0.4f)
                 {
-                    seillaenge = 0.4F;
+                    ropelength = 0.4F;
                     movementfactorY = 1;
                 }
                 else
                 {
-                    if (value > seillaenge)
+                    if (value > ropelength)
                     {
                         movementfactorY = 100 / (tower.Length - value) * ((tower.Length - value) + 0.2f) / 100;
                     } else
@@ -94,27 +97,27 @@ namespace DemoOpenGLBasicsCS.interfaces
                     {
                         movementfactorY = 1;
                     }
-                    seillaenge = value;
+                    ropelength = value;
                 }
                 matrix.TranslateY(movementfactorY);
             }
         }
 
-        public float Seilposition
+        public float Ropeposition
         {
-            get { return seilposition; }
+            get { return ropeposition; }
 
             set
             {
                 if (value > boom.Length)
                 {
-                    seilposition = (float)boom.Length;
+                    ropeposition = (float)boom.Length;
                     // set it to 1, so the vector doesn't move
                     movementfactorXZ = 1;
                 }
                 else if (value < 0.5f)
                 {
-                    seilposition = 0.5f;
+                    ropeposition = 0.5f;
                     movementfactorXZ = 1;
                 }
                 else
@@ -123,14 +126,14 @@ namespace DemoOpenGLBasicsCS.interfaces
                     // > 1 will move the ball away from the middle
                     // < 0 we all die?
                     // yeah we just died and need to add a condition that filters for 0...
-                    if (value > seilposition) {
+                    if (value > ropeposition) {
                         movementfactorXZ = 100 / value * (value + 0.05f) / 100;
                     }
                     else
                     {
                         movementfactorXZ = 100 / value * (value - 0.05f) / 100;
                     }
-                    seilposition = value;
+                    ropeposition = value;
                 }
                 matrix.TranslateXZ(movementfactorXZ);
             }
@@ -143,7 +146,8 @@ namespace DemoOpenGLBasicsCS.interfaces
         public double Radiant { get => Degree2Radiant(drehwinkel); }
         public double MovementfactorXZ { get => movementfactorXZ;}
         public double MovementfactorY { get => movementfactorY;}
-        public double Towerlength { get => towerheight;}
+        public double Towerheight { get => tower.Length;}
+        public double Boomlength { get => boom.Length; }
 
         public virtual void setMovement(IMovement movement)
         {
@@ -172,7 +176,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             // calculation fails if one of the factors is 0
             if (degree != 0)
             {
-                degree = degree * Math.PI / 180;
+                degree = degree * (2 * Math.PI / 360);
             }
             return degree;
         }
@@ -195,14 +199,14 @@ namespace DemoOpenGLBasicsCS.interfaces
             GLU.gluCylinder(boom.Element, 0.2, 0.2, boom.Length, 3, 10);
             GLU.gluQuadricDrawStyle(boom.Element, style);
 
-            seil = new CylinderPart(seillaenge);
-            GL.glTranslated(0.0, 0.0, Seilposition);
+            rope = new CylinderPart(ropelength);
+            GL.glTranslated(0.0, 0.0, Ropeposition);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 1, 0, 0);
-            GLU.gluCylinder(seil.Element, 0.01, 0.01, seil.Length, 20, 10);
-            GLU.gluQuadricDrawStyle(seil.Element, style);
+            GLU.gluCylinder(rope.Element, 0.01, 0.01, rope.Length, 20, 10);
+            GLU.gluQuadricDrawStyle(rope.Element, style);
 
-            GL.glTranslated(0.0, 0.0, Seillaenge);
+            GL.glTranslated(0.0, 0.0, Ropelength);
             GLUT.glutWireSphere(0.1, 100, 150);
         }
     }

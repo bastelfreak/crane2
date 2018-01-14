@@ -6,7 +6,7 @@ namespace DemoOpenGLBasicsCS.movements
     {
         public void move(ICrane element)
         {
-            element.Seillaenge = element.Seillaenge + 0.2f;
+            element.Ropelength = element.Ropelength + 0.2f;
         }   
     }
 }

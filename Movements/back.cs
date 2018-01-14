@@ -6,7 +6,7 @@ namespace DemoOpenGLBasicsCS.movements
     {
         public void move(ICrane element)
         {
-            element.Seilposition = element.Seilposition - 0.05f;
+            element.Ropeposition = element.Ropeposition - 0.05f;
         }
     }
 }
