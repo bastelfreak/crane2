@@ -45,7 +45,7 @@ namespace DemoOpenGLBasicsCS
             {
                 oglView.Kran1.setMovement(b);
                 oglView.Kran1.move();
-                oglView.Kran1.zeichnung();
+                oglView.Kran1.Draw();
                 oglView.Refresh();
                 oglView.Focus();
                 Update_positions();

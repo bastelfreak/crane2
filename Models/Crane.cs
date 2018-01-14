@@ -11,9 +11,9 @@ namespace DemoOpenGLBasicsCS.models
             this.colorblue = colorblue;
         }
 
-        public override void zeichnung()
+        public override void Draw()
         {
-            base.zeichnung();
+            base.Draw();
         }
 
     }

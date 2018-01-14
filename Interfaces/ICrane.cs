@@ -177,7 +177,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             return degree;
         }
 
-        public virtual void zeichnung()
+        public virtual void Draw()
         { //Kran wird definiert und anschließend gezeichnet
             GL.glColor3f(colorred, colorgreen, colorblue);
             GL.glTranslated(0.0, 0.0, 0.0);

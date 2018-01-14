@@ -15,7 +15,7 @@ namespace DemoOpenGLBasicsCS
         public void drawScene()
         {
             coordinateSystem(3.5); //Übergebene Zahl gibt Länge der R, G, B Pfeile des Koordinatensystems an
-            Kran1.zeichnung();           
+            Kran1.Draw();           
         }
                     
         
