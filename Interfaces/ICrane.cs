@@ -16,6 +16,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         private double movementfactorXZ;
         private double movementfactorY;
         private double towerlength;
+        private double boomlength;
         protected float colorred;
         protected float colorgreen;
         protected float colorblue;
@@ -27,6 +28,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             seillaenge = 1.5f;
             seilposition = 0.5f;
             towerlength = 3;
+            boomlength = 2;
             Vector3D InitialVector = new Vector3D
             {
                 X = seilposition,
@@ -144,7 +146,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             GLU.gluCylinder(tower.Element, 0.2, 0.2, tower.Length, 4, 10);
             GLU.gluQuadricDrawStyle(tower.Element, style);
 
-            boom = new CylinderPart(2);
+            boom = new CylinderPart(boomlength);
             GL.glTranslated(0.0, 0.0, tower.Length - 0.2f);
             GL.glRotated(90, 0, 1, 0);
             GL.glRotated(90, 0, 0, 1);
