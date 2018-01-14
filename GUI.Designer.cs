@@ -70,6 +70,11 @@
             this.tbx_ropelength = new System.Windows.Forms.TextBox();
             this.tbx_ropeposition = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.tbx_mark_z = new System.Windows.Forms.TextBox();
+            this.tbx_mark_y = new System.Windows.Forms.TextBox();
+            this.tbx_mark_x = new System.Windows.Forms.TextBox();
+            this.btn_mark_position = new System.Windows.Forms.Button();
+            this.btn_goto_position = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panel
@@ -345,7 +350,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(1122, 421);
+            this.label12.Location = new System.Drawing.Point(1122, 420);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(51, 25);
             this.label12.TabIndex = 29;
@@ -353,7 +358,7 @@
             // 
             // tbx_rad
             // 
-            this.tbx_rad.Location = new System.Drawing.Point(1179, 421);
+            this.tbx_rad.Location = new System.Drawing.Point(1179, 420);
             this.tbx_rad.Name = "tbx_rad";
             this.tbx_rad.Size = new System.Drawing.Size(100, 20);
             this.tbx_rad.TabIndex = 30;
@@ -362,7 +367,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(1134, 446);
+            this.label13.Location = new System.Drawing.Point(1134, 445);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(24, 25);
             this.label13.TabIndex = 31;
@@ -370,7 +375,7 @@
             // 
             // tbx_alpha
             // 
-            this.tbx_alpha.Location = new System.Drawing.Point(1179, 452);
+            this.tbx_alpha.Location = new System.Drawing.Point(1179, 451);
             this.tbx_alpha.Name = "tbx_alpha";
             this.tbx_alpha.Size = new System.Drawing.Size(100, 20);
             this.tbx_alpha.TabIndex = 32;
@@ -453,11 +458,60 @@
             this.label18.TabIndex = 41;
             this.label18.Text = "Seilposition";
             // 
+            // tbx_mark_z
+            // 
+            this.tbx_mark_z.Location = new System.Drawing.Point(913, 472);
+            this.tbx_mark_z.Name = "tbx_mark_z";
+            this.tbx_mark_z.Size = new System.Drawing.Size(100, 20);
+            this.tbx_mark_z.TabIndex = 47;
+            // 
+            // tbx_mark_y
+            // 
+            this.tbx_mark_y.Location = new System.Drawing.Point(913, 446);
+            this.tbx_mark_y.Name = "tbx_mark_y";
+            this.tbx_mark_y.Size = new System.Drawing.Size(100, 20);
+            this.tbx_mark_y.TabIndex = 46;
+            // 
+            // tbx_mark_x
+            // 
+            this.tbx_mark_x.Location = new System.Drawing.Point(913, 420);
+            this.tbx_mark_x.Name = "tbx_mark_x";
+            this.tbx_mark_x.Size = new System.Drawing.Size(100, 20);
+            this.tbx_mark_x.TabIndex = 45;
+            // 
+            // btn_mark_position
+            // 
+            this.btn_mark_position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_mark_position.Location = new System.Drawing.Point(1026, 431);
+            this.btn_mark_position.Name = "btn_mark_position";
+            this.btn_mark_position.Size = new System.Drawing.Size(75, 23);
+            this.btn_mark_position.TabIndex = 48;
+            this.btn_mark_position.Text = "Markieren";
+            this.btn_mark_position.UseVisualStyleBackColor = true;
+            this.btn_mark_position.Click += new System.EventHandler(this.btn_mark_position_Click);
+            // 
+            // btn_goto_position
+            // 
+            this.btn_goto_position.Enabled = false;
+            this.btn_goto_position.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_goto_position.Location = new System.Drawing.Point(1026, 458);
+            this.btn_goto_position.Name = "btn_goto_position";
+            this.btn_goto_position.Size = new System.Drawing.Size(75, 23);
+            this.btn_goto_position.TabIndex = 49;
+            this.btn_goto_position.Text = "Fahren";
+            this.btn_goto_position.UseVisualStyleBackColor = true;
+            this.btn_goto_position.Click += new System.EventHandler(this.btn_goto_position_Click);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1291, 504);
+            this.Controls.Add(this.btn_goto_position);
+            this.Controls.Add(this.btn_mark_position);
+            this.Controls.Add(this.tbx_mark_z);
+            this.Controls.Add(this.tbx_mark_y);
+            this.Controls.Add(this.tbx_mark_x);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.tbx_ropeposition);
             this.Controls.Add(this.tbx_ropelength);
@@ -551,6 +605,11 @@
         private System.Windows.Forms.TextBox tbx_ropelength;
         private System.Windows.Forms.TextBox tbx_ropeposition;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox tbx_mark_z;
+        private System.Windows.Forms.TextBox tbx_mark_y;
+        private System.Windows.Forms.TextBox tbx_mark_x;
+        private System.Windows.Forms.Button btn_mark_position;
+        private System.Windows.Forms.Button btn_goto_position;
     }
 }
 

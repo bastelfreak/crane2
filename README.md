@@ -46,3 +46,9 @@
 - move startpoint into matrix class
 - complete rewrite of matrix class
 - complete rewrite of all matrix/vector operations
+
+## Changes by Holger Stertz
+
+- Position of crane can be saved
+- Crane can go way back to saved position (Inverse Kinematics)
+

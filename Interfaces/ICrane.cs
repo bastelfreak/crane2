@@ -13,6 +13,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         private double drehwinkel;
         private double ropelength;
         private double ropeposition;
+
         private double movementfactorXZ;
         private double movementfactorY;
         private double towerheight;
@@ -21,6 +22,7 @@ namespace DemoOpenGLBasicsCS.interfaces
         protected float colorgreen;
         protected float colorblue;
         private Matrix matrix;
+
 
         public ICrane()
         {
@@ -58,7 +60,7 @@ namespace DemoOpenGLBasicsCS.interfaces
                 }
                 // we need to ensure that we're never < 360
                 // would mean we rotated too much to the right
-                else if (value <= -360){
+                else if (value <= -360) {
                     drehwinkel = value + 360;
                 }
                 else
@@ -141,14 +143,14 @@ namespace DemoOpenGLBasicsCS.interfaces
             }
         }
 
-       public IMovement movement { get; set; }
+        public IMovement movement { get; set; }
         public double X { get => matrix.X; }
         public double Y { get => matrix.Y; }
         public double Z { get => matrix.Z; }
         public double Radiant { get => Degree2Radiant(drehwinkel); }
-        public double MovementfactorXZ { get => movementfactorXZ;}
-        public double MovementfactorY { get => movementfactorY;}
-        public double Towerheight { get => tower.Length;}
+        public double MovementfactorXZ { get => movementfactorXZ; }
+        public double MovementfactorY { get => movementfactorY; }
+        public double Towerheight { get => tower.Length; }
         public double Boomlength { get => boom.Length; }
 
         public virtual void setMovement(IMovement movement)
@@ -211,5 +213,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             GL.glTranslated(0.0, 0.0, Ropelength);
             GLUT.glutWireSphere(0.1, 100, 150);
         }
+
+
     }
 }
