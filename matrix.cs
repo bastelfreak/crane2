@@ -47,7 +47,7 @@ namespace DemoOpenGLBasicsCS
                         0, 1, 0, 0,
                         -(Math.Sin(radiant)), 0, Math.Cos(radiant), 0,
                         0, 0, 0, 1);
-                finalVector = Vector3D.Multiply(finalVector, rotate_z_matrix);
+                finalVector = Vector3D.Multiply(finalVector, rotate_y_matrix);
             }
             return finalVector;
         }
