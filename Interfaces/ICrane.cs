@@ -11,8 +11,8 @@ namespace DemoOpenGLBasicsCS.interfaces
         private CylinderPart boom;
         private CylinderPart rope;
         private double drehwinkel;
-        private float ropelength;
-        private float ropeposition;
+        private double ropelength;
+        private double ropeposition;
         private double movementfactorXZ;
         private double movementfactorY;
         private double towerheight;
@@ -69,14 +69,14 @@ namespace DemoOpenGLBasicsCS.interfaces
                 matrix.RotateY(Degree2Radiant(drehwinkel));
             }
         }
-        public float Ropelength
+        public double Ropelength
         {
             get { return ropelength; }
             set
             {
                 if (value > tower.Length - 0.3f)
                 {
-                    ropelength = (float)tower.Length - 0.3F;
+                    ropelength = tower.Length - 0.3F;
                     movementfactorY = 1;
                 }
                 else if (value < 0.4f)
@@ -105,7 +105,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             }
         }
 
-        public float Ropeposition
+        public double Ropeposition
         {
             get { return ropeposition; }
 
@@ -113,7 +113,7 @@ namespace DemoOpenGLBasicsCS.interfaces
             {
                 if (value > boom.Length)
                 {
-                    ropeposition = (float)boom.Length;
+                    ropeposition = boom.Length;
                     // set it to 1, so the vector doesn't move
                     movementfactorXZ = 1;
                 }
