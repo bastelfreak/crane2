@@ -46,3 +46,8 @@
 - move startpoint into matrix class
 - complete rewrite of matrix class
 - complete rewrite of all matrix/vector operations
+
+## Toni Eckardt was here!!!
+- *GERMAN* Hab auf kleine Tippfehler hingewiesen
+- moralische unterstützung
+- fragen gestellt
