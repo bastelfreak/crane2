@@ -36,7 +36,7 @@ namespace DemoOpenGLBasicsCS
             tbx_tri_y.Text = Math.Round(oglView.Kran1.Towerlength - oglView.Kran1.Seillaenge, 2).ToString();
             tbx_tri_z.Text = Math.Round(Math.Sin(Math.PI * oglView.Kran1.Drehwinkel / 180) * oglView.Kran1.Seilposition, 2).ToString();
             tbx_alpha.Text = oglView.Kran1.Drehwinkel.ToString();
-            tbx_rad.Text = oglView.Kran1.Radiant.ToString();
+            tbx_rad.Text = Math.Round(oglView.Kran1.Radiant, 2).ToString();
         }
 
         private void Movement(interfaces.IMovement b)
