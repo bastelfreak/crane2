@@ -31,10 +31,10 @@
 
 - Trigonometric operations are slightly different to matrix operations
 
-## Changes by All
+## Changes by Lars Wallberg
 
 - create GUI, interfaces and classes
-- create Code for all these functions and classes
+- projectleader for the base of the code for most of these functions and classes
 
 ## Changes by Tim Meusel
 
@@ -69,6 +69,7 @@
 
 - change translation for the first vector
 - change float into double for axes results
+- kamera startposition changed
 
 ## Changes by Holger Stertz
 
