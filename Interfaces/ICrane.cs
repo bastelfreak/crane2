@@ -184,7 +184,42 @@ namespace DemoOpenGLBasicsCS.interfaces
         }
 
         public virtual void Draw()
-        { //at this point the crane will be drawing
+        {
+            // Raster zeichnen
+            double skalierung = 0.1;
+            int laenge = 10;
+            for (int i = 0; i <= 10; i++)
+            {
+                // X-Y-Raster
+                GL.glBegin(GL.GL_LINES);
+                GL.glColor3d(1.0, 0.0, 0.0);
+                GL.glVertex3d(i * skalierung, 0.0, 0.0);
+                GL.glVertex3d(i * skalierung, laenge * skalierung, 0.0);
+                GL.glVertex3d(0.0, i * skalierung, 0.0);
+                GL.glVertex3d(laenge * skalierung, i * skalierung, 0.0);
+                GL.glEnd();
+
+                // X-Z-Raster
+                GL.glBegin(GL.GL_LINES);
+                GL.glColor3d(0.0, 1.0, 0.0);
+                GL.glVertex3d(i * skalierung, 0.0, 0.0);
+                GL.glVertex3d(i * skalierung, 0.0, laenge * skalierung);
+                GL.glVertex3d(0.0, 0.0, i * skalierung);
+                GL.glVertex3d(laenge * skalierung, 0.0, i * skalierung);
+                GL.glEnd();
+
+                // Y-Z-Raster
+                GL.glBegin(GL.GL_LINES);
+                GL.glColor3d(0.0, 0.0, 1.0);
+                GL.glVertex3d(0.0, i * skalierung, 0.0);
+                GL.glVertex3d(0.0, i * skalierung, laenge * skalierung);
+                GL.glVertex3d(0.0, 0.0, i * skalierung);
+                GL.glVertex3d(0.0, laenge * skalierung, i * skalierung);
+                GL.glEnd();
+
+            }
+
+            //at this point the crane will be drawing
             GL.glColor3f(colorred, colorgreen, colorblue);
             GL.glTranslated(0.0, 0.0, 0.0);
             GL.glRotated(-90, 1, 0, 0);
