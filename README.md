@@ -13,23 +13,23 @@
 
 ### Rotate
 
-- Changes X
-- Changes Z
+- changes X
+- changes Z
 
 ### Doom
 
 (if he isn't directly on the X/Y axis)
 
-- Changes X
-- Changes Z
+- changes X
+- changes Z
 
 ### Up/Down
 
-- Changes Y
+- changes Y
 
 ## known bugs
 
-- Trigonometric operations are slightly different to matrix operations
+- trigonometric operations are slightly different to matrix operations
 
 ## Changes by Lars Wallberg
 
@@ -64,6 +64,7 @@
 - add comments, for undefined code
 - add radiant and degres for calculating Matrics
 - change "drehwinkel" into rotationangle
+- create first uml draft
 
 ## Changes by Mario Bost
 
@@ -73,6 +74,12 @@
 
 ## Changes by Holger Stertz
 
-- Position of crane can be saved
-- Crane can go way back to saved position (Inverse Kinematics)
-- Calculate the current vektor of the ball by using trigonometry
+- position of crane can be saved
+- crane can go way back to saved position (Inverse Kinematics)
+- calculate the current vektor of the ball by using trigonometry
+
+## Changes by Nikolai Luis
+
+- professional support for git and code questions
+- design thinking classes and functions
+- single math functions
